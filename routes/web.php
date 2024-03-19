@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\JadwalPraktekController;
+use App\Http\Controllers\JanjiTemuController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,70 +21,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('content.dashboard.admin', [
-        'activeMenu' => 'dashboard',
-    ]);
-});
+// Dashboard Routes
+Route::get('/', [DashboardController::class, 'index']);
 
-Route::get('/antrian', function () {
-    return view('content.antrian.index', [
-        'activeMenu'=> 'antrian',
-    ]);
-});
+// Antrian Routes
+Route::get('/antrian', [AntrianController::class, 'index']);
 
-Route::get('/janji-temu', function () {
-    return view('content.janji-temu.index', [
-        'activeMenu' => 'janji-temu'
-    ]);
-});
+// Janji-Temu Routes
+Route::get('/janji-temu', [JanjiTemuController::class, 'index']);
 
-Route::get('/jadwal-praktek', function () {
-    return view('content.jadwal-praktek.index', [
-        'activeMenu' => 'jadwal-praktek'
-    ]);
-});
+// Jadwal-Praktek Routes
+Route::get('/jadwal-praktek', [JadwalPraktekController::class, 'index']);
 
-Route::get('/pasien', function () {
-    return view('content.pasien.index', [
-        'activeMenu' => 'pasien'
-    ]);
-});
+// Pasien Routes
+Route::get('/pasien', [PasienController::class, 'index']);
+Route::get('/pasien/new', [PasienController::class, 'create']);
 
-Route::get('/pasien/new', function () {
-    return view('content.pasien.create', [
-        'activeMenu' => 'pasien-new'
-    ]);
-});
+// Dokter Routes
+Route::get('/dokter', [DokterController::class, 'index']);
+Route::get('/dokter/new', [DokterController::class, 'create']);
 
-Route::get('/dokter', function () {
-    return view('content.dokter.index', [
-        'activeMenu' => 'dokter'
-    ]);
-});
+// Obat Routes
+Route::get('/obat', [ObatController::class, 'index']);
+Route::get('/obat/input', [ObatController::class, 'create']);
 
-Route::get('/dokter/new', function () {
-    return view('content.dokter.create', [
-        'activeMenu' => 'dokter-new'
-    ]);
-});
-
-Route::get('/obat', function () {
-    return view('content.obat.index', [
-        'activeMenu' => 'obat'
-    ]);
-});
-
-Route::get('/obat/input', function () {
-    return view('content.obat.create', [
-        'activeMenu' => 'obat-input'
-    ]);
-});
-
-Route::get('/auth/login', function () {
-    return view('auth.login');
-});
-
-Route::get('/auth/register', function () {
-    return view('auth.register');
-});
+// Authentication Routes
+Route::get('/auth/login', [AuthController::class, 'login']);
+Route::get('/auth/register', [AuthController::class, 'register']);
