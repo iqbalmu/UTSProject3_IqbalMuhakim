@@ -16,6 +16,13 @@
             </div>
         </div> --}}
         <!-- /Search -->
+        <div class="navbar-nav align-items-center">
+            <div class="nav-item d-flex align-items-center">
+                    <span class="fw-bold">
+                        @yield('header')
+                    </span>
+            </div>
+        </div>
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
@@ -73,7 +80,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
+                        <a class="dropdown-item" href="/auth/login">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
                         </a>

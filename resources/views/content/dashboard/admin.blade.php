@@ -2,15 +2,15 @@
 
 @section('title', 'Dashboard')
 
-@section('vendor-style')
+@section('vendor-styles')
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 @endsection
 
-@section('vendor-script')
+@section('vendor-scripts')
     <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 @endsection
 
-@section('page-script')
+@section('page-scripts')
     <script src="../assets/js/dashboards-analytics.js"></script>
 @endsection
 

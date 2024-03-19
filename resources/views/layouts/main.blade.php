@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed layout-wide" dir="ltr" data-theme="theme-default"
-    data-assets-path="../assets/" data-template="vertical-menu-template-free">
+    data-assets-path="/assets/" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
@@ -13,7 +13,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
 
     <!-- Include Styles -->
     @include('layouts.sections.styles')
