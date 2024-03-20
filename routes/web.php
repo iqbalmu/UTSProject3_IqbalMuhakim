@@ -42,8 +42,13 @@ Route::get('/dokter', [DokterController::class, 'index']);
 Route::get('/dokter/new', [DokterController::class, 'create']);
 
 // Obat Routes
-Route::get('/obat', [ObatController::class, 'index']);
-Route::get('/obat/input', [ObatController::class, 'create']);
+Route::get('/obat', [ObatController::class, 'index'])->name('obat.index');
+Route::get('/obat/input', [ObatController::class, 'create'])->name('obat.create');
+Route::get('/obat/{id}/detail', [ObatController::class, 'show'])->name('obat.show');
+Route::get('/obat/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
+Route::post('/obat', [ObatController::class, 'store'])->name('obat.store');
+Route::post('/obat/{id}', [ObatController::class, 'update'])->name('obat.update');
+Route::delete('/obat', [ObatController::class, 'remove'])->name('obat.remove');
 
 // Authentication Routes
 Route::get('/auth/login', [AuthController::class, 'login']);

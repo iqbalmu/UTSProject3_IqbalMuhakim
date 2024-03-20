@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->integer('stok');
             $table->string('penyedia');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->date('kadaluarsa');
             $table->timestamps();
         });
