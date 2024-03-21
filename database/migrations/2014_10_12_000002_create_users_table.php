@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nama');
             $table->string('nomor_hp');
-            $table->string('status_aktif');
+            $table->string('status_aktif')->default('aktif');
             $table->foreignId('role_id')->references('id_role')->on('roles');
             $table->timestamps();
         });

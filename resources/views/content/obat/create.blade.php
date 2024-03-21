@@ -22,7 +22,7 @@
                                 <div class="input-group input-group-merge">
                                     <input type="text" class="form-control" id="nama" name="nama"
                                         placeholder="nama obat" aria-label="nama obat" aria-describedby="nama obat"
-                                        required />
+                                        required autofocus />
                                 </div>
                             </div>
                         </div>

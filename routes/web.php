@@ -34,8 +34,13 @@ Route::get('/janji-temu', [JanjiTemuController::class, 'index']);
 Route::get('/jadwal-praktek', [JadwalPraktekController::class, 'index']);
 
 // Pasien Routes
-Route::get('/pasien', [PasienController::class, 'index']);
-Route::get('/pasien/new', [PasienController::class, 'create']);
+Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+Route::get('/pasien/new/{step?}', [PasienController::class, 'create'])->name('pasien.create');
+Route::get('/pasien/{id}/detail', [PasienController::class, 'show'])->name('pasien.show');
+Route::get('/pasien/{id}/edit', [PasienController::class, 'edit'])->name('pasien.edit');
+Route::post('/pasien/new/account', [PasienController::class, 'storeAccount'])->name('pasien.create.account');
+Route::post('/pasien/new/profile', [PasienController::class, 'storeProfile'])->name('pasien.create.profile');
+Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
 
 // Dokter Routes
 Route::get('/dokter', [DokterController::class, 'index']);

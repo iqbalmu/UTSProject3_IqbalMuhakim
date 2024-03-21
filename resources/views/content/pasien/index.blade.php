@@ -17,19 +17,57 @@
 @endsection
 
 @section('content')
-    <table class="table table-striped" id="myTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>nama</th>
-                <th>profesi</th>
-                <th>umur</th>
-                <th>kontak</th>
-                <th>action</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
+    <div class="card p-4">
+        <table class="table table-striped" id="myTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>nama</th>
+                    <th>profesi</th>
+                    <th>jenis kelamin</th>
+                    <th class="text-center">kontak</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($data as $user)
+                    <tr>
+                        <td>
+                            {{ $user->id_user }}
+                        </td>
+                        <td>
+                            {{ $user->nama }} ({{ $user->username }})
+                        </td>
+                        <td>
+                            {{ $user->pasien->profesi }}
+                        </td>
+                        <td>
+                            {{ $user->pasien->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan' }}
+                        </td>
+                        <td class="text-center">
+                            {{ $user->nomor_hp }}
+                        </td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ route('pasien.show', $user->id_user) }}"><i
+                                            class="bx bx-show-alt me-1"></i>Detail</a>
+                                    <a class="dropdown-item" href="{{ route('pasien.edit', $user->id_user) }}"><i
+                                            class="bx bx-edit-alt me-1"></i>Edit</a>
+                                    {{-- <a class="dropdown-item" href="/obat/delete"><i class="bx bx-trash me-1"></i>Delete</a> --}}
+                                    <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#obatModal" data-obat-id={{ $user->id_user }}
+                                        data-obat-name={{ $user->nama }}>
+                                        <i class="bx bx-trash me-1"></i>Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

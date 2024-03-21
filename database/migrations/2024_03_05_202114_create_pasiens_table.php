@@ -14,19 +14,20 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id('id_pasien');
+            $table->string('nik');
             $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('profesi');
             $table->integer('tinggi_badan');
             $table->integer('berat_badan');
-            $table->string('riwayat_kesehatan');
-            $table->string('alergi');
-            $table->string('kondisi_khusus');
-            $table->string('status_nikah');
-            $table->string('nama_keluarga');
-            $table->string('nomor_hp_keluarga');
-            $table->string('alamat_keluarga');
-            $table->date('tanggal_datar');
+            // $table->string('nomor_hp_keluarga');
+            // $table->string('riwayat_kesehatan');
+            // $table->string('alergi');
+            // $table->string('kondisi_khusus');
+            // $table->string('status_nikah');
+            // $table->string('nama_keluarga');
+            // $table->string('alamat_keluarga');
+            // $table->date('tanggal_datar');
             $table->foreignId('user_id')->references('id_user')->on('users');
             $table->timestamps();
         });
