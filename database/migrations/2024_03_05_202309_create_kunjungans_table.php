@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('kunjungans', function (Blueprint $table) {
             $table->id('id_kunjungan');
             $table->date('tanggal');
-            $table->date('waktu');
+            $table->time('waktu');
             $table->string('status');
             $table->foreignId('pasien_id')->references('id_pasien')->on('pasiens');
             $table->foreignId('dokter_id')->references('id_dokter')->on('dokters');

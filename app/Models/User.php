@@ -50,13 +50,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    /**
-     * Get the pasien associated with the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
+
     public function pasien(): HasOne
     {
         return $this->hasOne(Pasien::class, 'user_id', 'id_user');
+    }
+
+    public function dokter(): HasOne
+    {
+        return $this->hasOne(Dokter::class, 'user_id', 'id_user');
     }
 }

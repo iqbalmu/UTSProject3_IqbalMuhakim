@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Dokter Baru')
+@section('title', 'Dokter')
 
-@section('header', 'Form Dokter Baru')
+@section('header', 'Update Data Dokter')
 
 @section('page-scripts')
     <script type="text/javascript">
@@ -33,12 +33,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
-                <form action="{{ route('dokter.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('dokter.update', $dokter->id_user) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="card-body">
                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                            <img src="/assets/img/avatars/1.png" alt="user-avatar" class="d-block rounded" height="100"
-                                width="100" id="uploadedAvatar" />
+                            <img src="{{ '/uploads/dokter/' . $dokter->dokter->foto }}" alt="user-avatar"
+                                class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                            {{-- <img src="/assets/img/avatars/1.png" alt="user-avatar" class="d-block rounded" height="100"
+                                width="100" id="uploadedAvatar" /> --}}
                             <div class="button-wrapper">
                                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                     <span class="d-none d-sm-block">Upload new photo</span>
@@ -67,8 +70,9 @@
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="nama" class="form-label">Nama Lengkap</label>
-                                <input class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
-                                    type="text" id="nama" name="nama" placeholder="Doe" />
+                                <input class="form-control @error('nama') is-invalid @enderror"
+                                    value="{{ old('nama', $dokter->nama) }}" type="text" id="nama" name="nama"
+                                    placeholder="Doe" />
                                 @error('nama')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -78,7 +82,8 @@
                             <div class="mb-3 col-md-6">
                                 <label for="username" class="form-label">Username</label>
                                 <input class="form-control @error('username') is-invalid @enderror" type="text"
-                                    id="username" name="username" placeholder="JohnD" value="{{ old('username') }}" />
+                                    id="username" name="username" placeholder="JohnD"
+                                    value="{{ old('username', $dokter->username) }}" />
                                 @error('username')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -105,7 +110,7 @@
                                 <label for="email" class="form-label">E-mail</label>
                                 <input class="form-control @error('email') is-invalid @enderror" type="text"
                                     id="email" name="email" placeholder="john.doe@example.com"
-                                    value="{{ old('email') }}" />
+                                    value="{{ old('email', $dokter->email) }}" />
                                 @error('email')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -119,7 +124,7 @@
                                     <input type="text" id="nomor_hp" name="nomor_hp"
                                         class="form-control
                                     @error('nomor_hp') is-invalid @enderror"
-                                        placeholder="0821 9650 6900" value="{{ old('nomor_hp') }}" />
+                                        placeholder="0821 9650 6900" value="{{ old('nomor_hp', $dokter->nomor_hp) }}" />
                                 </div>
                                 @error('nomor_hp')
                                     <div class="form-text text-danger">
@@ -137,7 +142,7 @@
                                 <label for="nomor_str" class="form-label">Nomor STR</label>
                                 <input class="form-control @error('nomor_str') is-invalid @enderror" type="text"
                                     id="nomor_str" name="nomor_str" placeholder="11232321321241231"
-                                    value="{{ old('nomor_str') }}" />
+                                    value="{{ old('nomor_str', $dokter->dokter->nomor_str) }}" />
                                 @error('nomor_str')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -148,7 +153,7 @@
                                 <label for="nomor_sip" class="form-label">Nomor SIP</label>
                                 <input class="form-control @error('nomor_sip') is-invalid @enderror" type="text"
                                     id="nomor_sip" name="nomor_sip" placeholder="11232321321241231"
-                                    value="{{ old('nomor_sip') }}" />
+                                    value="{{ old('nomor_sip', $dokter->dokter->nomor_sip) }}" />
                                 @error('nomor_sip')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -159,7 +164,7 @@
                                 <label for="spesialisasi" class="form-label">Spesialisasi</label>
                                 <input class="form-control @error('spesialisasi') is-invalid @enderror" type="text"
                                     name="spesialisasi" id="spesialisasi" placeholder="Bedah Otak"
-                                    value="{{ old('spesialisasi') }}" />
+                                    value="{{ old('spesialisasi', $dokter->dokter->spesialisasi) }}" />
                                 @error('spesialisasi')
                                     <div class="form-text text-danger">
                                         {{ $message }}

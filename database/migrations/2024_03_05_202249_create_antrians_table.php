@@ -14,8 +14,6 @@ return new class extends Migration
     {
         Schema::create('antrians', function (Blueprint $table) {
             $table->id('id_antrian');
-            $table->date('tanggal');
-            $table->date('waktu');
             $table->string('status');
             $table->foreignId('pasien_id')->references('id_pasien')->on('pasiens');
             $table->timestamps();

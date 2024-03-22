@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Antrian;
+use App\Models\Pasien;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AntrianController extends Controller
@@ -10,6 +13,33 @@ class AntrianController extends Controller
     {
         return view('content.antrian.index', [
             'activeMenu' => 'antrian',
+            'pasiens' => User::select('username', 'nama', 'id_user')->where('role_id', 4)->get(),
+            'antrian' => Antrian::has('pasien')->get()
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $pasien = Pasien::where('user_id', $request->user_id)->first();
+        $antrian = new Antrian();
+        $antrian->status = 'menunggu';
+        $antrian->pasien_id = $pasien->id_pasien;
+
+        $antrian->save();
+
+        notyf()->position('y', 'top')->addSuccess('Antrian Pasien Berhasil Ditambahkan');
+        return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+
+        $antrian = Antrian::find($request->id);
+
+        $antrian->status = $request->status;
+        $antrian->save();
+
+        notyf()->position('y', 'top')->addSuccess('Status Antrian Berhasil Diperbarui');
+        return redirect()->back();
     }
 }

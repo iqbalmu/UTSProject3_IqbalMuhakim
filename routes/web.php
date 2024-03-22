@@ -25,10 +25,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'index']);
 
 // Antrian Routes
-Route::get('/antrian', [AntrianController::class, 'index']);
+Route::get('/antrian', [AntrianController::class, 'index'])->name('antrian.index');
+Route::post('/antrian', [AntrianController::class, 'store'])->name('antrian.store');
+Route::put('/antrian', [AntrianController::class, 'update'])->name('antrian.update');
 
 // Janji-Temu Routes
-Route::get('/janji-temu', [JanjiTemuController::class, 'index']);
+Route::get('/janji-temu', [JanjiTemuController::class, 'index'])->name('temu.index');
+Route::post('/janji-temu', [JanjiTemuController::class, 'store'])->name('temu.store');
+Route::put('/janji-temu', [JanjiTemuController::class, 'update'])->name('temu.update');
 
 // Jadwal-Praktek Routes
 Route::get('/jadwal-praktek', [JadwalPraktekController::class, 'index']);
@@ -43,8 +47,12 @@ Route::post('/pasien/new/profile', [PasienController::class, 'storeProfile'])->n
 Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
 
 // Dokter Routes
-Route::get('/dokter', [DokterController::class, 'index']);
-Route::get('/dokter/new', [DokterController::class, 'create']);
+Route::get('/dokter', [DokterController::class, 'index'])->name('dokter.index');
+Route::get('/dokter/new', [DokterController::class, 'create'])->name('dokter.create');
+Route::get('/dokter/{id}/edit', [DokterController::class, 'edit'])->name('dokter.edit');
+Route::get('/dokter/{id}/detail', [DokterController::class, 'show'])->name('dokter.show');
+Route::post('/dokter', [DokterController::class, 'store'])->name('dokter.store');
+Route::put('/dokter/{id}', [DokterController::class, 'update'])->name('dokter.update');
 
 // Obat Routes
 Route::get('/obat', [ObatController::class, 'index'])->name('obat.index');
