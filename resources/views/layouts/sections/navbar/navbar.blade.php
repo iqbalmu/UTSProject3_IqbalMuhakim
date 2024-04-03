@@ -18,9 +18,9 @@
         <!-- /Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
-                    <span class="fw-bold">
-                        @yield('header')
-                    </span>
+                <span class="fw-bold">
+                    @yield('header')
+                </span>
             </div>
         </div>
 
@@ -45,8 +45,30 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-medium d-block">
+                                        {{ Auth::user()->nama ?? 'guest' }}
+                                    </span>
+                                    <small class="text-muted">
+                                        @switch(Auth::user()->role_id)
+                                            @case(1)
+                                                {{ 'Admin' }}
+                                            @break
+
+                                            @case(2)
+                                                {{ 'Admisi' }}
+                                            @break
+
+                                            @case(3)
+                                                {{ 'Dokter' }}
+                                            @break
+
+                                            @case(4)
+                                                {{ 'Apoteker' }}
+                                            @break
+
+                                            @default
+                                        @endswitch
+                                    </small>
                                 </div>
                             </div>
                         </a>
@@ -80,10 +102,18 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/auth/login">
-                            <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
-                        </a>
+                        <form action="{{ route('auth.logout') }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="dropdown-item">
+                                <i class="bx bx-power-off me-2"></i>
+                                <span class="align-middle">Log Out</span>
+                            </button>
+                            {{-- <a class="dropdown-item" href="/auth/login">
+                                <i class="bx bx-power-off me-2"></i>
+                                <span class="align-middle">Log Out</span>
+                            </a> --}}
+                        </form>
                     </li>
                 </ul>
             </li>

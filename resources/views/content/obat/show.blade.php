@@ -5,7 +5,6 @@
 @section('header', 'Detail Obat')
 
 @section('content')
-    {{-- @dd($data) --}}
     <div class="row">
         <div class="col-xxl">
             <div class="card mb-4">

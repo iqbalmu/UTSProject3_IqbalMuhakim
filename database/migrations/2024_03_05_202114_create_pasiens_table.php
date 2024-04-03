@@ -13,23 +13,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pasiens', function (Blueprint $table) {
-            $table->id('id_pasien');
-            $table->string('nik');
-            $table->string('jenis_kelamin');
-            $table->string('alamat');
-            $table->string('profesi');
-            $table->integer('tinggi_badan');
-            $table->integer('berat_badan');
-            // $table->string('nomor_hp_keluarga');
-            // $table->string('riwayat_kesehatan');
-            // $table->string('alergi');
-            // $table->string('kondisi_khusus');
-            // $table->string('status_nikah');
-            // $table->string('nama_keluarga');
-            // $table->string('alamat_keluarga');
-            // $table->date('tanggal_datar');
-            $table->foreignId('user_id')->references('id_user')->on('users');
+            $table->increments('id_pasien');
+            $table->string('nik', 16);
+            $table->string('jenis_kelamin', 1);
+            $table->string('alamat', 100);
+            $table->string('profesi', 50);
+            // $table->integer('tinggi_badan');
+            // $table->integer('berat_badan');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id_user')->on('users');
         });
     }
 

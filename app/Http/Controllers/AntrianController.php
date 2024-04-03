@@ -6,6 +6,7 @@ use App\Models\Antrian;
 use App\Models\Pasien;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AntrianController extends Controller
 {
@@ -13,7 +14,7 @@ class AntrianController extends Controller
     {
         return view('content.antrian.index', [
             'activeMenu' => 'antrian',
-            'pasiens' => User::select('username', 'nama', 'id_user')->where('role_id', 4)->get(),
+            'pasiens' => User::select('nama', 'email', 'id_user')->where('role_id', 5)->get(),
             'antrian' => Antrian::has('pasien')->get()
         ]);
     }

@@ -12,13 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('resep_details', function (Blueprint $table) {
-            $table->id('id_resep_detail');
-            $table->string('metode');
-            $table->integer('frekuensi');
-            $table->integer('durasi');
-            $table->foreignId('obat_id')->references('id_obat')->on('obats');
-            $table->foreignId('resep_id')->references('id_resep')->on('reseps');
+            $table->increments('id_resep_detail');
+            $table->unsignedInteger('resep_id');
+            $table->unsignedInteger('obat_id');
+            $table->string('dosis', 30);
+            $table->string('frekuensi', 30);
+            $table->string('durasi', 30);
+            $table->string('metode', 30);
+            $table->string('syarat', 30);
             $table->timestamps();
+
+            $table->foreign('obat_id')->references('id_obat')->on('obats');
+            $table->foreign('resep_id')->references('id_resep')->on('reseps');
         });
     }
 

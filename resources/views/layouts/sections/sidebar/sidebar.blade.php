@@ -55,106 +55,24 @@
 
     <div class="menu-inner-shadow"></div>
 
-    <ul class="menu-inner py-1">
-        <!-- Dashboards -->
-        <li class="menu-item @if ($activeMenu == 'dashboard') active @endif">
-            <a href="/" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Dashboards">Dashboards</div>
-            </a>
-        </li>
+    @switch(Auth::user()->role_id)
+        @case(1)
+            @include('layouts.sections.sidebar.admin')
+        @break
 
-        {{-- Admisi --}}
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Admisi</span>
-        </li>
-        <li class="menu-item @if ($activeMenu == 'antrian') active @endif">
-            <a href="/antrian" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-envelope"></i>
-                <div data-i18n="Antrian">Antrian</div>
-                <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">3</div>
-            </a>
-        </li>
-        <li class="menu-item @if ($activeMenu == 'janji-temu') active @endif">
-            <a href="/janji-temu" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div data-i18n="">Janji Temu</div>
-                <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">4</div>
-            </a>
-        </li>
-        <li class="menu-item @if ($activeMenu == 'jadwal-praktek') active @endif">
-            <a href="/jadwal-praktek" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div data-i18n="">Jadwal Praktek</div>
-            </a>
-        </li>
+        @case(2)
+            @include('layouts.sections.sidebar.admisi')
+        @break
 
-        <!-- Data -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data</span></li>
-        <li class="menu-item @if ($activeMenu == 'pasien' || $activeMenu == 'pasien-new') active open @endif">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Pasien</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item @if ($activeMenu == 'pasien') active @endif">
-                    <a href="/pasien" class="menu-link">
-                        <div data-i18n="Notifications">Data Pasien</div>
-                    </a>
-                </li>
-                <li class="menu-item @if ($activeMenu == 'pasien-new') active @endif ">
-                    <a href="/pasien/new" class="menu-link">
-                        <div data-i18n="Connections">Pasien Baru</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @case(3)
+            @include('layouts.sections.sidebar.dokter')
+        @break
 
-        <li class="menu-item @if ($activeMenu == 'dokter' || $activeMenu == 'dokter-new') active open @endif">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Misc">Dokter</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item @if($activeMenu == 'dokter') active @endif ">
-                    <a href="/dokter" class="menu-link">
-                        <div data-i18n="Error">Data Dokter</div>
-                    </a>
-                </li>
-                <li class="menu-item @if($activeMenu == 'dokter-new') active @endif ">
-                    <a href="/dokter/new" class="menu-link">
-                        <div data-i18n="Error">Dokter Baru</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @case(4)
+            @include('layouts.sections.sidebar.apoteker')
+        @break
 
-        <li class="menu-item @if ($activeMenu == 'obat' || $activeMenu == 'obat-input') active open @endif">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Obat</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item @if($activeMenu == 'obat') active @endif ">
-                    <a href="/obat" class="menu-link">
-                        <div data-i18n="Basic">Data Obat</div>
-                    </a>
-                </li>
-                <li class="menu-item @if($activeMenu == 'obat-input') active @endif ">
-                    <a href="/obat/input" class="menu-link">
-                        <div data-i18n="Basic">Input Obat</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @default
+    @endswitch
 
-        <!-- Misc -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-        <li class="menu-item">
-            <a href="" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support</div>
-            </a>
-        </li>
-    </ul>
 </aside>

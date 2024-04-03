@@ -17,105 +17,25 @@
 @section('page-scripts')
     <script src="/assets/js/data-tables.js"></script>
     <script src="/assets/js/antrian.js"></script>
-    <script>
-        // In your Javascript (external .js resource or <script> tag)
-        $(document).ready(function() {
-            $('#pasien').select2({
-                dropdownParent: $('#modalAntrian')
-            });
-        });
-    </script>
 @endsection
 
 @section('content')
+
+    <!-- Modal Create -->
+    @include('content.antrian.modal.create')
+
+    <!-- Modal Update Status -->
+    @include('content.antrian.modal.edit')
+
     <div class="card p-4">
-        <div class="mb-3 d-flex">
-            <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAntrian">
-                <span class="tf-icons bx bx-pie-chart-alt me-1"></span>Antrian Baru
-            </button>
-
-            <!-- Modal Antrian -->
-            <div class="modal fade" id="modalAntrian" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <form action="{{ route('antrian.store') }}" method="post">
-                            @csrf
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalAntrianTitle">Antrian Baru</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="pasien" class="form-label">Pasien</label>
-                                        <select id="pasien" class="form-control" name="user_id" style="width: 100%;">
-                                            <option value="">Select Pasien</option>
-                                            @foreach ($pasiens as $pasien)
-                                                <option value="{{ $pasien->id_user }}">
-                                                    {{ $pasien->nama }} ({{ $pasien->username }})
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                    Close
-                                </button>
-                                <button type="submit" class="btn btn-primary">Buat Antrian</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        @if (auth()->user()->role_id === 2)
+            <div class="mb-3 d-flex">
+                <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAntrian">
+                    <span class="tf-icons bx bx-pie-chart-alt me-1"></span>Antrian Baru
+                </button>
             </div>
+        @endif
 
-            <!-- Modal Update Status -->
-            <div class="modal fade" id="modalUpdateStatus" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <form action="{{ route('antrian.update') }}" method="post">
-                            @csrf
-                            @method('put')
-
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalUpdateStatusTitle">Update Status</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="pasien" class="form-label">Antrian <span class="h5">#<b
-                                                    class="nomor">-</b></span> </label>
-                                        <input type="text" class="form-control" value="" id="input-pasien"
-                                            disabled>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="id" id="antrianId">
-                                <div class="row">
-                                    <div class="col mb-3">
-                                        <label for="pasien" class="form-label">Status</label>
-                                        <select id="pasien" class="form-control" name="status" style="width: 100%;">
-                                            <option value="menunggu">Menunggu</option>
-                                            <option value="proses">Proses</option>
-                                            <option value="selesei">Selesai</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                    Close
-                                </button>
-                                <button type="submit" class="btn btn-primary">Update Status</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <table class="table table-striped" id="myTable">
             <thead>
                 <tr>

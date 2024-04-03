@@ -33,10 +33,10 @@
                 @foreach ($data as $user)
                     <tr>
                         <td>
-                            {{ $user->id_user }}
+                            {{ $user->pasien->id_pasien }}
                         </td>
                         <td>
-                            {{ $user->nama }} ({{ $user->username }})
+                            {{ $user->nama }}
                         </td>
                         <td>
                             {{ $user->pasien->profesi }}

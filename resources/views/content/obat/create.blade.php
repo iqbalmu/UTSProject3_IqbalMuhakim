@@ -5,7 +5,6 @@
 @section('header', 'Input Obat Baru')
 
 @section('content')
-    {{-- {{ dd($vendors) }} --}}
     <div class="row">
         <div class="col-xxl">
             <div class="card mb-4">

@@ -16,12 +16,12 @@
                             <input class="form-control" value="{{ $pasien->nama }}" type="text" id="nama"
                                 name="nama" placeholder="John" disabled />
                         </div>
-                        <div class="mb-3 col-md-6">
+                        {{-- <div class="mb-3 col-md-6">
                             <label for="username" class="form-label">Username</label>
                             <input class="form-control" type="text" id="username" name="username" placeholder="JohnD"
                                 value="{{ $pasien->username }}" disabled />
-                        </div>
-                        <div class="form-password-toggle mb-3 col-md-6">
+                        </div> --}}
+                        {{-- <div class="form-password-toggle mb-3 col-md-6">
                             <label class="form-label" for="basic-default-password32">Password</label>
                             <div class="input-group input-group-merge">
                                 <input type="password" class="form-control" id="basic-default-password32" name="password"
@@ -30,7 +30,7 @@
                                 <span class="input-group-text cursor-pointer" id="basic-default-password"><i
                                         class="bx bx-hide"></i></span>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
                             <input class="form-control" type="text" id="email" name="email"
@@ -57,7 +57,7 @@
                             <input class="form-control" type="text" id="nik" name="nik"
                                 placeholder="11232321321241231" value="{{ $pasien->pasien->nik }}" disabled />
                         </div>
-                        <div class="mb-3 col-md-6">
+                        {{-- <div class="mb-3 col-md-6">
                             <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
                             <input class="form-control" type="number" name="tinggi_badan" id="tinggi_badan"
                                 placeholder="175" value="{{ $pasien->pasien->tinggi_badan }}" disabled />
@@ -66,7 +66,7 @@
                             <label for="berat_badan" class="form-label">Berat Badan</label>
                             <input class="form-control" type="number" name="berat_badan" id="berat_badan" placeholder="65"
                                 value="{{ $pasien->pasien->berat_badan }}" disabled />
-                        </div>
+                        </div> --}}
                         <div class="mb-3 col-md-6">
                             <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                             <select id="jenis_kelamin" class="select2 form-select" name="jenis_kelamin" disabled>

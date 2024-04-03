@@ -10,7 +10,7 @@ class Obat extends Model
     use HasFactory;
 
     protected $primaryKey = "id_obat";
-    
+
     protected $fillable = [
         'nama',
         'kategori',
@@ -18,6 +18,7 @@ class Obat extends Model
         'harga',
         'stok',
         'kadaluarsa',
-        'keterangan'
+        'keterangan',
+        'user_id',
     ];
 }

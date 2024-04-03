@@ -1,5 +1,11 @@
-// mengirim data ke modal
+
 $(document).ready(function () {
+    // select-2 modal
+    $('#pasien').select2({
+        dropdownParent: $('#modalAntrian')
+    });
+
+    // mengirim data ke modal
     // Ketika modal ditampilkan
     $('#modalUpdateStatus').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Tombol yang memicu modal

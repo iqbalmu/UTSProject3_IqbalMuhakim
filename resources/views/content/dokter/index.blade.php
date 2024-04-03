@@ -32,7 +32,7 @@
                 @foreach ($data as $user)
                     <tr>
                         <td>
-                            {{ $user->id_user }}
+                            {{ $user->dokter->id_dokter }}
                         </td>
                         <td class="d-flex align-items-center gap-3">
                             <img src="{{ '/uploads/dokter/' . $user->dokter->foto }}" alt="foto dokter" alt="user-avatar"

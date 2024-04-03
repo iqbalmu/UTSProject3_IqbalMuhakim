@@ -16,29 +16,18 @@
                     <form action="{{ route('pasien.create.account') }}" method="post">
                         @csrf
                         <div class="row">
-                            {{-- <div class="mb-3 col-md-6">
-                                <label for="firstName" class="form-label">Nama Depan</label>
-                                <input class="form-control @error('firstName') is-invalid @enderror"
-                                    value="{{ old('firstName') }}" type="text" id="firstName" name="firstName"
-                                    placeholder="John" autofocus />
-                                @error('firstName')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
                             <div class="mb-3 col-md-6">
                                 <label for="nama" class="form-label">Nama Lengkap</label>
                                 <input class="form-control @error('nama') is-invalid @enderror"
                                     value="{{ old('nama') }}" type="text" id="nama" name="nama"
-                                    placeholder="John Doe" />
+                                    placeholder="John Doe" autofocus />
                                 @error('nama')
                                     <div class="form-text text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
+                            {{-- <div class="mb-3 col-md-6">
                                 <label for="username" class="form-label">Username</label>
                                 <input class="form-control @error('username') is-invalid @enderror" type="text"
                                     id="username" name="username" placeholder="JohnD" value="{{ old('username') }}" />
@@ -47,14 +36,14 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-password-toggle mb-3 col-md-6">
                                 <label class="form-label" for="basic-default-password32">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
                                         id="basic-default-password32" name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="basic-default-password" />
+                                        aria-describedby="basic-default-password"/>
                                     <span class="input-group-text cursor-pointer" id="basic-default-password"><i
                                             class="bx bx-hide"></i></span>
                                 </div>

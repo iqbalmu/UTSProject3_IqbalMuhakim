@@ -1,6 +1,15 @@
 // mengirim data ke modal
 $(document).ready(function () {
-    // Ketika modal ditampilkan
+    // select-2
+    $('#pasien').select2({
+        dropdownParent: $('#modalTemu')
+    });
+
+    $('#dokter').select2({
+        dropdownParent: $('#modalTemu')
+    });
+
+    // update data modal
     $('#modalUpdateStatusTemu').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Tombol yang memicu modal
         var antrianId = button.data('antrian-id'); // Ekstrak informasi dari data-* atribut

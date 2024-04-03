@@ -17,7 +17,8 @@ class RoleSeeder extends Seeder
             ['id_role' => 1, 'roles' => 'admin'],
             ['id_role' => 2, 'roles' => 'admisi'],
             ['id_role' => 3, 'roles' => 'dokter'],
-            ['id_role' => 4, 'roles' => 'pasien'],
+            ['id_role' => 4, 'roles' => 'apoteker'],
+            ['id_role' => 5, 'roles' => 'pasien'],
         ]);
     }
 }

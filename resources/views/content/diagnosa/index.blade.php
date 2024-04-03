@@ -1,0 +1,62 @@
+@extends('layouts.main')
+
+@section('title', 'Diagnosa')
+
+@section('header', 'Diagnosa Pasien')
+
+@section('vendor-styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2-bootstrap5-theme@1.1.0/dist/js/select2-bootstrap5-theme.min.js"></script>
+@endsection
+
+@section('vendor-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endsection
+
+@section('page-scripts')
+    <script src="/assets/js/diagnosa.js"></script>
+@endsection
+
+@section('content')
+    <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-kesehatan-tab" data-bs-toggle="pill" data-bs-target="#pills-kesehatan"
+                type="button" role="tab" aria-controls="pills-kesehatan" aria-selected="true">Riwayat &
+                Keluhan</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-pemeriksaan-tab" data-bs-toggle="pill" data-bs-target="#pills-pemeriksaan"
+                type="button" role="tab" aria-controls="pills-pemeriksaan" aria-selected="false">
+                Pemeriksaan</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-diagnosa-tab" data-bs-toggle="pill" data-bs-target="#pills-diagnosa"
+                type="button" role="tab" aria-controls="pills-diagnosa" aria-selected="false">Diagnosa</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-obat-tab" data-bs-toggle="pill" data-bs-target="#pills-obat" type="button"
+                role="tab" aria-controls="pills-obat" aria-selected="false">Obat</button>
+        </li>
+    </ul>
+    <form action="{{ route('diagnosa.store') }}" method="post">
+        @csrf
+        <div class="tab-content p-0" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-kesehatan" role="tabpanel"
+                aria-labelledby="pills-kesehatan-tab" tabindex="0">
+                @include('content.diagnosa.forms.kesehatan')
+            </div>
+
+            <div class="tab-pane fade" id="pills-pemeriksaan" role="tabpanel" aria-labelledby="pills-pemeriksaan-tab"
+                tabindex="0">
+                @include('content.diagnosa.forms.pemeriksaan')
+            </div>
+            <div class="tab-pane fade" id="pills-diagnosa" role="tabpanel" aria-labelledby="pills-diagnosa-tab"
+                tabindex="0">
+                @include('content.diagnosa.forms.diagnosa')
+            </div>
+            <div class="tab-pane fade" id="pills-obat" role="tabpanel" aria-labelledby="pills-obat-tab" tabindex="0">
+                @include('content.diagnosa.forms.obat')
+            </div>
+        </div>
+    </form>
+@endsection

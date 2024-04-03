@@ -60,4 +60,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Dokter::class, 'user_id', 'id_user');
     }
+
+    public function role(): HasOne
+    {
+        return $this->hasOne(Role::class, 'role_id', 'id_role');
+    }
+
+
 }

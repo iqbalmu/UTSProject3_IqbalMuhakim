@@ -13,7 +13,7 @@ class PasienController extends Controller
 {
     public function index()
     {
-        $data = User::has('pasien')->where('role_id', 4)->get();
+        $data = User::has('pasien')->where('role_id', 5)->get();
         return view('content.pasien.index', [
             'activeMenu' => 'pasien',
             'data' => $data
@@ -25,7 +25,7 @@ class PasienController extends Controller
         $page = 'content.pasien.create.' . $step;
         return view($page, [
             'activeMenu' => 'pasien-new',
-            'pasiens' => User::select('username', 'nama', 'id_user')->where('role_id', 4)->get(),
+            'pasiens' => User::select('nama', 'id_user', 'email')->where('role_id', 5)->get(),
             'step' => $step
         ]);
     }
@@ -48,23 +48,78 @@ class PasienController extends Controller
         ]);
     }
 
+    // public function create()
+    // {
+    //     return view('content.pasien.create', [
+    //         'activeMenu' => 'pasien-new',
+    //         'pasiens' => User::select('nama', 'id_user', 'email')->where('role_id', 5)->get(),
+    //     ]);
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         "nama" => 'required',
+    //         "password" => 'required|min:8',
+    //         "email" => 'required|unique:users',
+    //         "nomor_hp" => 'required|unique:users|min:10',
+    //         'nik' => 'required|unique:pasiens|size:16',
+    //         'jenis_kelamin' => 'required',
+    //         'alamat' => 'required',
+    //         'profesi' => 'required'
+    //     ]);
+
+    //     try {
+    //         DB::transaction(function () use ($validatedData) {
+    //             $user = new User();
+    //             $user->nama = $validatedData['nama'];
+    //             // $user->username = $validatedData['username'];
+    //             $user->email = $validatedData['email'];
+    //             $user->password = Hash::make($validatedData['password']);
+    //             $user->nomor_hp = $validatedData['nomor_hp'];
+    //             $user->role_id = 3;
+    //             $user->save();
+
+    //             $dokter = new Dokter();
+    //             $dokter->nomor_str = $validatedData['nomor_str'];
+    //             $dokter->nomor_sip = $validatedData['nomor_sip'];
+    //             $dokter->spesialisasi = $validatedData['spesialisasi'];
+    //             $dokter->user_id = $user->id_user;
+    //             $dokter->save();
+
+    //             notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Ditambahkan');
+    //         });
+    //     } catch (\Exception $exception) {
+    //         DB::rollBack();
+
+    //         if (file_exists($filePath)) {
+    //             unlink($filePath);
+    //         }
+
+    //         dd('Update Data Pasien Failed: ' . $exception->getMessage());
+    //         notyf()->position('y', 'top')->addSuccess('Data Dokter Gagal Ditambahkan');
+    //     }
+
+    //     return redirect()->back();
+    // }
+
     public function storeAccount(Request $request)
     {
         $validatedData = $request->validate([
             "nama" => 'required',
-            "username" => 'required|unique:users',
-            "password" => 'required',
+            // "username" => 'required|unique:users',
+            "password" => 'required|min:8',
             "email" => 'required|unique:users,email',
-            "nomor_hp" => 'required|unique:users,nomor_hp'
+            "nomor_hp" => 'required|unique:users,nomor_hp|min:10'
         ]);
 
         $user = new User();
         $user->nama = $validatedData['nama'];
-        $user->username = $validatedData['username'];
+        // $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
         $user->nomor_hp = $validatedData['nomor_hp'];
-        $user->role_id = 4; //role pasien
+        $user->role_id = 5; //role pasien
         $user->status_aktif = 'aktif';
 
         $user->save();
@@ -77,12 +132,12 @@ class PasienController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => 'required|unique:pasiens',
-            'nik' => 'required|unique:pasiens',
+            'nik' => 'required|unique:pasiens|size:16',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'profesi' => 'required',
-            'tinggi_badan' => 'required',
-            'berat_badan' => 'required',
+            // 'tinggi_badan' => 'required',
+            // 'berat_badan' => 'required',
         ]);
 
         $pasien = new Pasien();
@@ -90,8 +145,8 @@ class PasienController extends Controller
         $pasien->jenis_kelamin = $validatedData['jenis_kelamin'];
         $pasien->alamat = $validatedData['alamat'];
         $pasien->profesi = $validatedData['profesi'];
-        $pasien->tinggi_badan = $validatedData['tinggi_badan'];
-        $pasien->berat_badan = $validatedData['berat_badan'];
+        // $pasien->tinggi_badan = $validatedData['tinggi_badan'];
+        // $pasien->berat_badan = $validatedData['berat_badan'];
         $pasien->user_id = $validatedData['user_id'];
 
         $pasien->save();
@@ -104,7 +159,7 @@ class PasienController extends Controller
     {
         $validatedData = $request->validate([
             "nama" => 'required',
-            "username" => 'required',
+            // "username" => 'required',
             "password" => 'nullable',
             "email" => 'required',
             "nomor_hp" => 'required',
@@ -112,18 +167,22 @@ class PasienController extends Controller
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
             'profesi' => 'required',
-            'tinggi_badan' => 'required',
-            'berat_badan' => 'required',
+            // 'tinggi_badan' => 'required',
+            // 'berat_badan' => 'required',
         ]);
 
         try {
             DB::transaction(function () use ($validatedData, $idUser) {
                 $user = User::find($idUser);
 
+                // if ($validatedData['email'] == $user->email) {
+                //     return back()->withInput()->withErrors(['email' => 'email exists']);
+                // }
+
                 $password = $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password;
 
                 $user->nama = $validatedData['nama'];
-                $user->username = $validatedData['username'];
+                // $user->username = $validatedData['username'];
                 $user->email = $validatedData['email'];
                 $user->password = $password;
                 $user->nomor_hp = $validatedData['nomor_hp'];
@@ -134,17 +193,15 @@ class PasienController extends Controller
                 $pasien->jenis_kelamin = $validatedData['jenis_kelamin'];
                 $pasien->alamat = $validatedData['alamat'];
                 $pasien->profesi = $validatedData['profesi'];
-                $pasien->tinggi_badan = $validatedData['tinggi_badan'];
-                $pasien->berat_badan = $validatedData['berat_badan'];
+                // $pasien->tinggi_badan = $validatedData['tinggi_badan'];
+                // $pasien->berat_badan = $validatedData['berat_badan'];
                 $pasien->save();
 
                 notyf()->position('y', 'top')->addSuccess('Data Pasien Berhasil Diperbarui');
             });
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd('Update Data Pasien Failed: ' . $exception->getMessage());
-
-            notyf()->position('y', 'top')->addSuccess('Data Pasien Gagal Diperbarui');
+            notyf()->position('y', 'top')->addError( 'Data Pasien Gagal Diperbarui');
         }
 
         return redirect()->back();

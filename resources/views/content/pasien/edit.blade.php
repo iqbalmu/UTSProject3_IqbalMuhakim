@@ -25,7 +25,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
+                            {{-- <div class="mb-3 col-md-6">
                                 <label for="username" class="form-label">Username</label>
                                 <input class="form-control @error('username') is-invalid @enderror" type="text"
                                     id="username" name="username" placeholder="JohnD"
@@ -35,7 +35,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-password-toggle mb-3 col-md-6">
                                 <label class="form-label" for="basic-default-password32">Password</label>
                                 <div class="input-group input-group-merge">
@@ -95,7 +95,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
+                            {{-- <div class="mb-3 col-md-6">
                                 <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
                                 <input class="form-control @error('tinggi_badan') is-invalid @enderror" type="number"
                                     name="tinggi_badan" id="tinggi_badan" placeholder="175"
@@ -116,7 +116,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="mb-3 col-md-6">
                                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                 <select id="jenis_kelamin"

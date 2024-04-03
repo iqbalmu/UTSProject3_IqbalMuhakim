@@ -5,7 +5,6 @@
 @section('header', 'Perbarui Data Obat')
 
 @section('content')
-    {{-- @dd($data) --}}
     <div class="row">
         <div class="col-xxl">
             <div class="card mb-4">
@@ -105,7 +104,7 @@
 
                         <div class="row justify-content-end">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{ route('obat.index') }}" class="btn btn-secondary">Back</a>
                             </div>
                         </div>

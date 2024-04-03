@@ -23,7 +23,7 @@
                                     <option value="">Select Pasien</option>
                                     @foreach ($pasiens as $pasien)
                                         <option value="{{ $pasien->id_user }}">
-                                            {{ $pasien->nama }} ({{ $pasien->username }})
+                                            {{ $pasien->nama }} ( {{ $pasien->email }} )
                                         </option>
                                     @endforeach
                                 </select>
@@ -33,17 +33,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="nik" class="form-label">NIK</label>
-                                <input class="form-control @error('nik') is-invalid @enderror" type="text" id="nik"
-                                    name="nik" placeholder="11232321321241231" value="{{ old('nik') }}" />
-                                @error('nik')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
+                            {{-- <div class="mb-3 col-md-6">
                                 <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
                                 <input class="form-control @error('tinggi_badan') is-invalid @enderror" type="number"
                                     name="tinggi_badan" id="tinggi_badan" placeholder="175"
@@ -63,7 +53,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="mb-3 col-md-6">
                                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                 <select id="jenis_kelamin"
@@ -74,6 +64,16 @@
                                     <option value="P">Perempuan</option>
                                 </select>
                                 @error('jenis_kelamin')
+                                    <div class="form-text text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="nik" class="form-label">NIK</label>
+                                <input class="form-control @error('nik') is-invalid @enderror" type="text" id="nik"
+                                    name="nik" placeholder="11232321321241231" value="{{ old('nik') }}" />
+                                @error('nik')
                                     <div class="form-text text-danger">
                                         {{ $message }}
                                     </div>

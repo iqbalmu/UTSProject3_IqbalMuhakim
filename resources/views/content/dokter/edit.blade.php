@@ -5,28 +5,7 @@
 @section('header', 'Update Data Dokter')
 
 @section('page-scripts')
-    <script type="text/javascript">
-        $(document).ready(function(e) {
-            let imagePreview = $('#uploadedAvatar');
-            let imageInput = $('#upload');
-            let imageReset = $('#imageReset');
-
-            // preview image
-            imageInput.change(function() {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    imagePreview.attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0])
-            })
-
-            // reset image
-            imageReset.click(function() {
-                imagePreview.attr('src', '/assets/img/avatars/1.png');
-                imageInput.val('');
-            })
-        });
-    </script>
+    <script src="/assets/js/dokter.js"></script>
 @endsection
 
 @section('content')
@@ -79,7 +58,7 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 col-md-6">
+                            {{-- <div class="mb-3 col-md-6">
                                 <label for="username" class="form-label">Username</label>
                                 <input class="form-control @error('username') is-invalid @enderror" type="text"
                                     id="username" name="username" placeholder="JohnD"
@@ -89,7 +68,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-password-toggle mb-3 col-md-6">
                                 <label class="form-label" for="basic-default-password32">Password</label>
                                 <div class="input-group input-group-merge">

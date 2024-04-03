@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class DokterController extends Controller
 {
@@ -49,25 +48,25 @@ class DokterController extends Controller
     {
         $validatedData = $request->validate([
             "nama" => 'required',
-            "username" => 'required|unique:users',
-            "password" => 'required',
+            // "username" => 'required|unique:users',
+            "password" => 'required|min:8',
             "email" => 'required|unique:users',
-            "nomor_hp" => 'required|unique:users',
-            'nomor_str' => 'required|unique:dokters',
-            'nomor_sip' => 'required|unique:dokters',
+            "nomor_hp" => 'required|unique:users|min:10',
+            'nomor_str' => 'required|unique:dokters|min:10',
+            'nomor_sip' => 'required|unique:dokters|min:10',
             'spesialisasi' => 'required',
             'foto' => 'required',
         ]);
 
         $foto = $request->file('foto');
-        $fileName = time() . '.' . $foto->getClientOriginalName();
+        $fileName = time() . '.' . $foto->getClientOriginalExtension();
         $filePath = public_path('/uploads/dokter/' . $fileName);
 
         try {
             DB::transaction(function () use ($validatedData, $foto, $fileName) {
                 $user = new User();
                 $user->nama = $validatedData['nama'];
-                $user->username = $validatedData['username'];
+                // $user->username = $validatedData['username'];
                 $user->email = $validatedData['email'];
                 $user->password = Hash::make($validatedData['password']);
                 $user->nomor_hp = $validatedData['nomor_hp'];
@@ -104,7 +103,7 @@ class DokterController extends Controller
     {
         $validatedData = $request->validate([
             "nama" => 'required',
-            "username" => 'required',
+            // "username" => 'required',
             "password" => 'nullable',
             "email" => 'required',
             "nomor_hp" => 'required',
@@ -121,7 +120,7 @@ class DokterController extends Controller
 
                 $foto = $request->file('foto');
                 if ($foto) {
-                    $fileName = time() . '.' . $foto->getClientOriginalName();
+                    $fileName = time() . '.' . $foto->getClientOriginalExtension();
                     $foto->move(public_path('/uploads/dokter/'), $fileName);
                     unlink('uploads/dokter/' . $user->dokter->foto);
                 } else {
@@ -131,7 +130,7 @@ class DokterController extends Controller
                 $password = $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password;
 
                 $user->nama = $validatedData['nama'];
-                $user->username = $validatedData['username'];
+                // $user->username = $validatedData['username'];
                 $user->email = $validatedData['email'];
                 $user->password = $password;
                 $user->nomor_hp = $validatedData['nomor_hp'];
@@ -146,7 +145,7 @@ class DokterController extends Controller
                 $dokter->user_id = $user->id_user;
                 $dokter->save();
 
-                notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Ditambahkan');
+                notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Diperbarui');
             });
         } catch (\Exception $exception) {
             DB::rollBack();

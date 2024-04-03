@@ -68,11 +68,15 @@ class ObatController extends Controller
             'keterangan' => 'nullable'
         ]);
 
+        $validatedData['user_id'] = 1;
+
+        // dd($validatedData);
+
         $obat = new Obat($validatedData);
         $obat->save();
 
         notyf()->position('y', 'top')->addSuccess('Data Obat Berhasil Disimpan');
-        return redirect()->back();
+        return redirect()->route('obat.index');
     }
 
     public function update(Request $request, $id)
@@ -95,11 +99,12 @@ class ObatController extends Controller
         $obat->stok = $validatedData['stok'];
         $obat->kadaluarsa = $validatedData['kadaluarsa'];
         $obat->keterangan = $validatedData['keterangan'];
+        $obat->user_id = $validatedData['user_id'] = 1;
 
         $obat->save();
 
         notyf()->position('y', 'top')->addSuccess('Data Obat Berhasil Diperbarui');
-        return redirect()->back();
+        return redirect()->route('obat.show', $id);
     }
 
     public function remove(Request $request)
