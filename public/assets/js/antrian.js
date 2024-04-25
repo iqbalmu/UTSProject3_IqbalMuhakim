@@ -1,7 +1,14 @@
 
 $(document).ready(function () {
+    $('#filter-tanggal').change(function() {
+        $('#form-filter').submit()
+    })
+
     // select-2 modal
     $('#pasien').select2({
+        dropdownParent: $('#modalAntrian')
+    });
+    $('#poli').select2({
         dropdownParent: $('#modalAntrian')
     });
 

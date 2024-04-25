@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pasien;
+use App\Models\RekamMedik;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,9 +34,13 @@ class PasienController extends Controller
     public function show($idPasien)
     {
         $pasien = User::has('pasien')->where('id_user', $idPasien)->first();
+        $mrn = $pasien->pasien->mrn;
+        $rekamMediks = RekamMedik::where('mrn', $mrn)->orderByDesc('created_at')->get();
+
         return view('content.pasien.show', [
             'activeMenu' => 'pasien',
             'pasien' => $pasien,
+            'rekamMediks' => $rekamMediks,
         ]);
     }
 
@@ -201,9 +206,20 @@ class PasienController extends Controller
             });
         } catch (\Exception $exception) {
             DB::rollBack();
-            notyf()->position('y', 'top')->addError( 'Data Pasien Gagal Diperbarui');
+            notyf()->position('y', 'top')->addError('Data Pasien Gagal Diperbarui');
         }
 
         return redirect()->back();
+    }
+
+    public function pasienMrn($userId, $mrnId)
+    {
+
+        $rMedik = RekamMedik::where('id_rekam_medik', $mrnId)->with('pemeriksaan', 'dokter', 'resep')->first();
+
+        return view('content.rekam-medik.index', [
+            'activeMenu' => 'pasien',
+            'rMedik' => $rMedik
+        ]);
     }
 }

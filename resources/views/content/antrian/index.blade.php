@@ -5,12 +5,12 @@
 @section('header', 'Antrian Pasien')
 
 @section('vendor-styles')
-    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.css" rel="stylesheet">
+    {{-- <link href="/assets/vendor/libs/datatables/datatables.min.css" rel="stylesheet"> --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('vendor-scripts')
-    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.js"></script>
+    {{-- <script src="/assets/vendor/libs/datatables/datatables.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
 
@@ -28,20 +28,43 @@
     @include('content.antrian.modal.edit')
 
     <div class="card p-4">
-        @if (auth()->user()->role_id === 2)
-            <div class="mb-3 d-flex">
+        <div class="mb-3 d-flex justify-content-between">
+            <form action="{{ route('antrian.index') }}" method="get" id="form-filter">
+                {{-- @csrf --}}
+                <div class="row">
+                    <div class="col">
+                        <input type="date" name="tanggal" id="filter-tanggal" class="form-control w-100"
+                            value="{{ $tanggal }}">
+                    </div>
+                    <div class="col">
+                        <select name="poli" id="filter-poli" class="form-select">
+                            <option value="">Poli</option>
+                            @foreach ($polis as $poli)
+                                <option value="{{ $poli->id_poli }}">{{ $poli->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                {{-- <button type="submit" class="btn btn btn-primary-outline" >
+                    <span class="tf-icons bx bx-pie-chart-alt me-1"></span>SET
+                </button> --}}
+            </form>
+
+            @if (auth()->user()->role_id === 2)
                 <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAntrian">
                     <span class="tf-icons bx bx-pie-chart-alt me-1"></span>Antrian Baru
                 </button>
-            </div>
-        @endif
+            @endif
+        </div>
 
         <table class="table table-striped" id="myTable">
             <thead>
                 <tr>
-                    <th>Antrian</th>
+                    <th>Nomor</th>
                     <th>Pasien</th>
+                    <th>Poli</th>
                     <th>status</th>
+                    <th>tanggal</th>
                     <th>action</th>
                 </tr>
             </thead>
@@ -50,10 +73,13 @@
                 @foreach ($antrian as $item)
                     <tr>
                         <td>
-                            {{ $item->id_antrian }}
+                            {{ $item->nomor }}
                         </td>
                         <td>
                             {{ $item->pasien->user->nama }}
+                        </td>
+                        <td>
+                            {{ $item->poli->nama }}
                         </td>
                         <td>
                             <span
@@ -65,11 +91,21 @@
                             </span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalUpdateStatus" data-antrian-id={{ $item->id_antrian }}
-                                data-nama-pasien={{ $item->pasien->user->nama }} data-status={{ $item->status }}>
-                                Update Status
-                            </button>
+                            {{ $item->tanggal }}
+                        </td>
+                        <td>
+                            @if (auth()->user()->role_id === 3)
+                                <a href="/antrian/{{ $item->nomor }}/poli/{{$item->poli->id_poli}}/pasien/{{ $item->pasien->mrn }}"
+                                    class="btn btn-sm btn-primary">
+                                    Diagnosa
+                                </a>
+                            @else
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalUpdateStatus" data-antrian-id={{ $item->id_antrian }}
+                                    data-nama-pasien={{ $item->pasien->user->nama }} data-status={{ $item->status }}>
+                                    Update Status
+                                </button>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

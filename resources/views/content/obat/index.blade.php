@@ -5,11 +5,11 @@
 @section('header', 'Data Obat')
 
 @section('vendor-styles')
-    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.css" rel="stylesheet">
+    <link href="/assets/vendor/libs/datatables/datatables.min.css" rel="stylesheet">
 @endsection
 
 @section('vendor-scripts')
-    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.js"></script>
+    <script src="/assets/vendor/libs/datatables/datatables.min.js"></script>
 @endsection
 
 @section('page-scripts')

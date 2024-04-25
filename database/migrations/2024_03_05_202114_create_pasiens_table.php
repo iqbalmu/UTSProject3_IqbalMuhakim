@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->increments('id_pasien');
+            $table->string('mrn')->unique();
             $table->string('nik', 16);
             $table->string('jenis_kelamin', 1);
             $table->string('alamat', 100);

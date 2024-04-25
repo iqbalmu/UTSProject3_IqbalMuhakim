@@ -19,12 +19,12 @@
             @enderror
         </div>
         <div class="mb-3 form-password-toggle">
-            <div class="d-flex justify-content-between">
+            {{-- <div class="d-flex justify-content-between">
                 <label class="form-label" for="password">Password</label>
                 <a href="">
                     <small>Forgot Password?</small>
                 </a>
-            </div>
+            </div> --}}
             <div class="input-group input-group-merge">
                 <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password"
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"

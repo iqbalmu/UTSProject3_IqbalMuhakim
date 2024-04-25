@@ -10,6 +10,7 @@ use App\Http\Controllers\JanjiTemuController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\RekamMedikController;
+use App\Http\Controllers\TebusObatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,53 +29,68 @@ Route::middleware('auth')->group(function () {
     // Dashboard Routes
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Antrian Routes
-    Route::get('/antrian', [AntrianController::class, 'index'])->name('antrian.index');
-    Route::post('/antrian', [AntrianController::class, 'store'])->name('antrian.store');
-    Route::put('/antrian', [AntrianController::class, 'update'])->name('antrian.update');
+    Route::middleware('role:admin')->group(function () {
+        // pasien
+        Route::get('/pasien/{id}/edit', [PasienController::class, 'edit'])->name('pasien.edit');
+        Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
+        Route::get('/pasien/new/{step?}', [PasienController::class, 'create'])->name('pasien.create');
+        Route::post('/pasien/new/account', [PasienController::class, 'storeAccount'])->name('pasien.create.account');
+        Route::post('/pasien/new/profile', [PasienController::class, 'storeProfile'])->name('pasien.create.profile');
 
-    // Janji-Temu Routes
-    Route::get('/janji-temu', [JanjiTemuController::class, 'index'])->name('temu.index');
-    Route::post('/janji-temu', [JanjiTemuController::class, 'store'])->name('temu.store');
-    Route::put('/janji-temu', [JanjiTemuController::class, 'update'])->name('temu.update');
+        // dokter
+        Route::get('/dokter/new', [DokterController::class, 'create'])->name('dokter.create');
+        Route::get('/dokter/{id}/edit', [DokterController::class, 'edit'])->name('dokter.edit');
+        Route::post('/dokter', [DokterController::class, 'store'])->name('dokter.store');
+        Route::put('/dokter/{id}', [DokterController::class, 'update'])->name('dokter.update');
+    });
 
-    // Jadwal-Praktek Routes
-    Route::get('/jadwal-praktek', [JadwalPraktekController::class, 'index'])->name('jpraktek.index');
-    Route::post('/jadwal-praktek', [JadwalPraktekController::class, 'store'])->name('jpraktek.store');
-    Route::put('/jadwal-praktek', [JadwalPraktekController::class, 'update'])->name('jpraktek.update');
-    Route::delete('/jadwal-praktek', [JadwalPraktekController::class, 'remove'])->name('jpraktek.remove');
+    Route::middleware('role:apoteker')->group(function () {
+        // Obat
+        Route::get('/obat', [ObatController::class, 'index'])->name('obat.index');
+        Route::get('/obat/input', [ObatController::class, 'create'])->name('obat.create');
+        Route::get('/obat/{id}/detail', [ObatController::class, 'show'])->name('obat.show');
+        Route::get('/obat/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
+        Route::post('/obat', [ObatController::class, 'store'])->name('obat.store');
+        Route::post('/obat/{id}', [ObatController::class, 'update'])->name('obat.update');
+        Route::delete('/obat', [ObatController::class, 'remove'])->name('obat.remove');
 
-    // Diagnosa Routes
-    Route::get('/diagnosa', [DiagnosaController::class, 'index'])->name('diagnosa.index');
-    Route::post('/diagnosa', [DiagnosaController::class,'store'])->name('diagnosa.store');
+        // Resep
+        Route::get('/tebus-obat', [TebusObatController::class, 'index'])->name('tebus-obat.index');
+    });
 
-    // Pasien Routes
-    Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
-    Route::get('/pasien/{id}/detail', [PasienController::class, 'show'])->name('pasien.show');
-    Route::get('/pasien/{id}/edit', [PasienController::class, 'edit'])->name('pasien.edit');
-    Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
-    Route::get('/pasien/new/{step?}', [PasienController::class, 'create'])->name('pasien.create');
-    Route::post('/pasien/new/account', [PasienController::class, 'storeAccount'])->name('pasien.create.account');
-    Route::post('/pasien/new/profile', [PasienController::class, 'storeProfile'])->name('pasien.create.profile');
-    // Route::get('/pasien/new', [PasienController::class, 'create'])->name('pasien.create');
-    // Route::post('/pasien/new/account', [PasienController::class, 'store'])->name('pasien.store');
+    Route::middleware('role:admisi')->group(function () {
+        // antrian
+        Route::post('/antrian', [AntrianController::class, 'store'])->name('antrian.store');
+        Route::put('/antrian', [AntrianController::class, 'update'])->name('antrian.update');
+    });
 
-    // Dokter Routes
-    Route::get('/dokter', [DokterController::class, 'index'])->name('dokter.index');
-    Route::get('/dokter/new', [DokterController::class, 'create'])->name('dokter.create');
-    Route::get('/dokter/{id}/edit', [DokterController::class, 'edit'])->name('dokter.edit');
-    Route::get('/dokter/{id}/detail', [DokterController::class, 'show'])->name('dokter.show');
-    Route::post('/dokter', [DokterController::class, 'store'])->name('dokter.store');
-    Route::put('/dokter/{id}', [DokterController::class, 'update'])->name('dokter.update');
+    Route::middleware('role:dokter')->group(function () {
+        // diagnosa
+        Route::get('/antrian/{nomor}/poli/{poli}/pasien/{mrn}', [DiagnosaController::class, 'get'])->name('diagnosa.get');
+        Route::post('/antrian/{nomor}/poli/{poli}/pasien/{mrn}', [DiagnosaController::class, 'diagnosa'])->name('diagnosa.store');
+    });
 
-    // Obat Routes
-    Route::get('/obat', [ObatController::class, 'index'])->name('obat.index');
-    Route::get('/obat/input', [ObatController::class, 'create'])->name('obat.create');
-    Route::get('/obat/{id}/detail', [ObatController::class, 'show'])->name('obat.show');
-    Route::get('/obat/{id}/edit', [ObatController::class, 'edit'])->name('obat.edit');
-    Route::post('/obat', [ObatController::class, 'store'])->name('obat.store');
-    Route::post('/obat/{id}', [ObatController::class, 'update'])->name('obat.update');
-    Route::delete('/obat', [ObatController::class, 'remove'])->name('obat.remove');
+    Route::middleware('role:admisi,dokter')->group(function () {
+        // Jadwal-Praktek Routes
+        Route::get('/jadwal-praktek', [JadwalPraktekController::class, 'index'])->name('jpraktek.index');
+        Route::post('/jadwal-praktek', [JadwalPraktekController::class, 'store'])->name('jpraktek.store');
+        Route::put('/jadwal-praktek', [JadwalPraktekController::class, 'update'])->name('jpraktek.update');
+        Route::delete('/jadwal-praktek', [JadwalPraktekController::class, 'remove'])->name('jpraktek.remove');
+
+        // Antrian
+        Route::get('/antrian', [AntrianController::class, 'index'])->name('antrian.index');
+
+        // Pasien
+        Route::get('/pasien', [PasienController::class, 'index'])->name('pasien.index');
+        Route::get('/pasien/{id}/detail', [PasienController::class, 'show'])->name('pasien.show');
+
+        // Rekam Medik Pasien
+        Route::get('/pasien/{userId}/mrn/{mrnId}', [PasienController::class, 'pasienMrn'])->name('pasien.mrn');
+
+        // Dokter
+        Route::get('/dokter', [DokterController::class, 'index'])->name('dokter.index');
+        Route::get('/dokter/{id}/detail', [DokterController::class, 'show'])->name('dokter.show');
+    });
 });
 
 // Authentication Routes

@@ -24,8 +24,10 @@ return new class extends Migration
             $table->string('foto', 30);
             $table->string('spesialisasi', 30);
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('poli_id');
             $table->timestamps();
 
+            $table->foreign('poli_id')->references('id_poli')->on('polis');
             $table->foreign('user_id')->references('id_user')->on('users');
         });
     }

@@ -18,25 +18,25 @@
             <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">3</div>
         </a>
     </li>
-    <li class="menu-item @if ($activeMenu == 'janji-temu') active @endif">
+    {{-- <li class="menu-item @if ($activeMenu == 'janji-temu') active @endif">
         <a href="{{ route('temu.index') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-chat"></i>
             <div data-i18n="">Janji Temu</div>
             <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">4</div>
         </a>
-    </li>
+    </li> --}}
     <li class="menu-item @if ($activeMenu == 'jadwal-praktek') active @endif">
         <a href="{{ route('jpraktek.index') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-chat"></i>
             <div data-i18n="">Jadwal Praktek</div>
         </a>
     </li>
-    <li class="menu-item @if ($activeMenu == 'diagnosa') active @endif">
+    {{-- <li class="menu-item @if ($activeMenu == 'diagnosa') active @endif">
         <a href="{{ route('diagnosa.index') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-chat"></i>
             <div data-i18n="">Diagnosa</div>
         </a>
-    </li>
+    </li> --}}
 
     <!-- Data -->
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Data</span></li>

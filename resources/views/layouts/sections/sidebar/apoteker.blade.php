@@ -3,7 +3,14 @@
     <li class="menu-item @if ($activeMenu == 'dashboard') active @endif">
         <a href="/" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Dashboards">Dashboards</div>
+            <div>Dashboards</div>
+        </a>
+    </li>
+
+    <li class="menu-item @if ($activeMenu == 'tebus-obat') active @endif">
+        <a href="{{route('tebus-obat.index')}}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div>Tebus Obat</div>
         </a>
     </li>
 
@@ -12,17 +19,17 @@
     <li class="menu-item @if ($activeMenu == 'obat' || $activeMenu == 'obat-input') active open @endif">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-            <div data-i18n="Authentications">Obat</div>
+            <div>Obat</div>
         </a>
         <ul class="menu-sub">
             <li class="menu-item @if ($activeMenu == 'obat') active @endif ">
                 <a href="/obat" class="menu-link">
-                    <div data-i18n="Basic">Data Obat</div>
+                    <div>Data Obat</div>
                 </a>
             </li>
             <li class="menu-item @if ($activeMenu == 'obat-input') active @endif ">
                 <a href="/obat/input" class="menu-link">
-                    <div data-i18n="Basic">Input Obat</div>
+                    <div>Input Obat</div>
                 </a>
             </li>
         </ul>

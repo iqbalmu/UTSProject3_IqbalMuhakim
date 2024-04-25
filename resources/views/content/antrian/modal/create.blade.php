@@ -12,14 +12,33 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="pasien" class="form-label">Pasien</label>
-                            <select id="pasien" class="form-control" name="user_id" style="width: 100%;">
-                                <option value="">Select Pasien</option>
+                            <select id="pasien" class="form-control" name="mrn" style="width: 100%;">
+                                <option value="">--</option>
                                 @foreach ($pasiens as $pasien)
-                                    <option value="{{ $pasien->id_user }}">
-                                        {{ $pasien->nama }} ( {{ $pasien->email }} )
+                                    <option value="{{ $pasien->mrn }}">
+                                        {{ $pasien->mrn }} ( {{ $pasien->user->nama }} )
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="poli" class="form-label">Poliklinik</label>
+                            <select id="poli" class="form-control" name="poli_id" style="width: 100%;">
+                                <option value="">--</option>
+                                @foreach ($polis as $poli)
+                                    <option value="{{ $poli->id_poli }}">
+                                        {{ $poli->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="tanggal" class="form-label">Tanggal</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control">
                         </div>
                     </div>
                 </div>

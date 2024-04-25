@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('rekam_mediks', function (Blueprint $table) {
             $table->increments('id_rekam_medik');
+            $table->string('mrn');
             // $table->date('tanggal_pemeriksaan');
             // $table->date('tanggal_entri');
             // riwayat kesehatan
@@ -25,13 +26,13 @@ return new class extends Migration
             $table->string('penatalaksanaan', 100);
             $table->string('catatan_dokter', 100)->nullable();
 
-            $table->unsignedInteger('pasien_id');
+            // $table->unsignedInteger('pasien_id');
             $table->unsignedInteger('dokter_id');
             $table->unsignedInteger('pemeriksaan_id');
             $table->unsignedInteger('resep_id');
             $table->timestamps();
 
-            $table->foreign('pasien_id')->references('id_pasien')->on('pasiens');
+            $table->foreign('mrn')->references('mrn')->on('pasiens');
             $table->foreign('dokter_id')->references('id_dokter')->on('dokters');
             $table->foreign('pemeriksaan_id')->references('id_pemeriksaan')->on('pemeriksaans');
             $table->foreign('resep_id')->references('id_resep')->on('reseps');

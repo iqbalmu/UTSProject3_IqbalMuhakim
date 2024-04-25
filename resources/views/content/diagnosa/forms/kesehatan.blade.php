@@ -3,16 +3,16 @@
     <div class="card-body">
         <div class="row">
             <div class="mb-3 col-md-12">
-                <label for="pasien" class="form-label">Pasien</label>
-                <select id="pasien" class="select2 form-select @error('pasien_id') is-invalid @enderror" name="pasien_id"
+                {{-- <label for="pasien" class="form-label">Pasien</label> --}}
+                {{-- <select id="pasien" class="select2 form-select @error('pasien_id') is-invalid @enderror" name="pasien_id"
                     autofocus>
                     <option value="">Select Pasien</option>
                     @foreach ($users as $pasien)
-                        <option value="{{ $pasien->pasien->id_pasien }}">
-                            {{ $pasien->nama }} ( {{ $pasien->email }} )
+                        <option value="{{ $pasien->pasien->mrn }}">
+                            {{ $pasien->pasien->mrn }} ( {{ $pasien->nama }} )
                         </option>
                     @endforeach
-                </select>
+                </select> --}}
                 @error('pasien_id')
                     <div class="form-text text-danger">
                         {{ $message }}
@@ -22,7 +22,7 @@
             <div class="col-md-12">
                 <label for="nama" class="form-label">Keluhan</label>
                 <textarea class="form-control @error('keluhan') is-invalid @enderror" value="{{ old('keluhan') }}" type="text"
-                    id="keluhan" name="keluhan" placeholder="keluhan pasien"></textarea>
+                    id="keluhan" name="keluhan" placeholder="keluhan pasien" autofocus></textarea>
                 @error('keluhan')
                     <div class="form-text text-danger">
                         {{ $message }}

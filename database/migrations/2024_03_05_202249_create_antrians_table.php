@@ -14,11 +14,15 @@ return new class extends Migration
     {
         Schema::create('antrians', function (Blueprint $table) {
             $table->increments('id_antrian');
-            $table->string('status', 10);
-            $table->unsignedInteger('pasien_id');
+            $table->string('mrn');
+            $table->unsignedInteger('poli_id');
+            $table->date('tanggal');
+            $table->unsignedInteger('nomor');
+            $table->string('status', 10)->default('menunggu');
             $table->timestamps();
 
-            $table->foreign('pasien_id')->references('id_pasien')->on('pasiens');
+            $table->foreign('poli_id')->references('id_poli')->on('polis');
+            $table->foreign('mrn')->references('mrn')->on('pasiens');
         });
     }
 

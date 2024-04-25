@@ -4,28 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\Antrian;
 use App\Models\Pasien;
+use App\Models\Poli;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AntrianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $tanggal = $request->input("tanggal") ?? Carbon::today()->format('Y-m-d');
+        $antrian = Antrian::where("tanggal", $tanggal)->get();
+
         return view('content.antrian.index', [
             'activeMenu' => 'antrian',
-            'pasiens' => User::select('nama', 'email', 'id_user')->where('role_id', 5)->get(),
-            'antrian' => Antrian::has('pasien')->get()
+            'pasiens' => Pasien::all(),
+            'polis' => Poli::all(),
+            'tanggal' => $tanggal,
+            'antrian' => $antrian,
         ]);
     }
 
     public function store(Request $request)
     {
-        $pasien = Pasien::where('user_id', $request->user_id)->first();
+        // $pasien = Pasien::where('user_id', $request->user_id)->first();
         $antrian = new Antrian();
-        $antrian->status = 'menunggu';
-        $antrian->pasien_id = $pasien->id_pasien;
-
+        // $antrian->status = 'menunggu';
+        $antrian->mrn = $request->mrn;
+        $antrian->poli_id = $request->poli_id;
+        $antrian->tanggal = $request->tanggal;
+        $antrian->nomor = Antrian::nomorAntrian($request->poli_id, $request->tanggal);
         $antrian->save();
 
         notyf()->position('y', 'top')->addSuccess('Antrian Pasien Berhasil Ditambahkan');

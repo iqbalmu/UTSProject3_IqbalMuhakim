@@ -5,11 +5,11 @@
 @section('header', 'Data Dokter')
 
 @section('vendor-styles')
-    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.css" rel="stylesheet">
+    <link href="/assets/vendor/libs/datatables/datatables.min.css" rel="stylesheet">
 @endsection
 
 @section('vendor-scripts')
-    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.js"></script>
+    <script src="/assets/vendor/libs/datatables/datatables.min.js"></script>
 @endsection
 
 @section('page-scripts')
@@ -50,14 +50,13 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('dokter.show', $user->id_user) }}"><i
                                             class="bx bx-show-alt me-1"></i>Detail</a>
-                                    <a class="dropdown-item" href="{{ route('dokter.edit', $user->id_user) }}"><i
+                                    {{-- <a class="dropdown-item" href="{{ route('dokter.edit', $user->id_user) }}"><i
                                             class="bx bx-edit-alt me-1"></i>Edit</a>
-                                    {{-- <a class="dropdown-item" href="/obat/delete"><i class="bx bx-trash me-1"></i>Delete</a> --}}
                                     <button type="button" class="dropdown-item" data-bs-toggle="modal"
                                         data-bs-target="#obatModal" data-obat-id={{ $user->id_user }}
                                         data-obat-name={{ $user->nama }}>
                                         <i class="bx bx-trash me-1"></i>Delete
-                                    </button>
+                                    </button> --}}
                                 </div>
                             </div>
                         </td>

@@ -1,7 +1,9 @@
 // select-2 form
 $(document).ready(function () {
-    $('#pasien').select2();
-    // $('.select-obat').select2();
+    // $('#pasien').select2();
+    // $('.select-obat').select2({
+    //     theme: 'bootstrap-5'
+    // });
 
     // clone input resep obat
     $('#add-input').click(() => {

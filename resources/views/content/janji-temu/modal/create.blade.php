@@ -15,7 +15,7 @@
                                 <option value="">nama pasien</option>
                                 @foreach ($pasiens as $pasien)
                                     <option value="{{ $pasien->pasien->id_pasien }}">
-                                        #{{ $pasien->pasien->id_pasien }} {{ $pasien->nama }}
+                                        {{ $pasien->pasien->mrn }} {{ $pasien->nama }}
                                     </option>
                                 @endforeach
                             </select>

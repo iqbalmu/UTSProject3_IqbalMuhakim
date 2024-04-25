@@ -8,7 +8,7 @@
                     {{-- <input class="form-control @error('obat') is-invalid @enderror" value="{{ old('obat') }}"
                         type="text" id="obat" name="obat[]" placeholder="nama obat" /> --}}
                     <select class="form-control select-obat @error('obat') is-invalid @enderror"
-                        name="obat[]" style="width: 100%">
+                        name="obat[]" data-placeholder="--">
                         <option value="">--</option>
                         @foreach ($obats as $obat)
                             <option value="{{ $obat->id_obat }}">

@@ -66,5 +66,9 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'role_id', 'id_role');
     }
 
-
+    public function hasRole($roles)
+    {
+        $currentRole = Role::find($this->role_id);
+        return in_array($currentRole->roles, $roles);
+    }
 }

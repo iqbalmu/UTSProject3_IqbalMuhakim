@@ -20,4 +20,11 @@ class Pasien extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id_user');
     }
+
+    protected static function boot(){
+        parent::boot();
+        static::creating(function ($pasien) {
+            $pasien->mrn = 'RM-' . date('YmdHis');
+        });
+    }
 }

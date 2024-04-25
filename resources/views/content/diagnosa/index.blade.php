@@ -5,12 +5,12 @@
 @section('header', 'Diagnosa Pasien')
 
 @section('vendor-styles')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2-bootstrap5-theme@1.1.0/dist/js/select2-bootstrap5-theme.min.js"></script>
+    <link href="/assets/vendor/libs/select2/select2.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/libs/select2/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 @endsection
 
 @section('vendor-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="/assets/vendor/libs/select2/select2.min.js"></script>
 @endsection
 
 @section('page-scripts')
@@ -38,7 +38,7 @@
                 role="tab" aria-controls="pills-obat" aria-selected="false">Obat</button>
         </li>
     </ul>
-    <form action="{{ route('diagnosa.store') }}" method="post">
+    <form action="/antrian/{{ $antrian }}/poli/{{ $poli }}/pasien/{{ $mrn }}" method="post">
         @csrf
         <div class="tab-content p-0" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-kesehatan" role="tabpanel"

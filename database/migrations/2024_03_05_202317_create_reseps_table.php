@@ -16,7 +16,7 @@ return new class extends Migration
             $table->increments('id_resep');
             // $table->date('tanggal');
             $table->string('keterangan', 100)->nullable();
-            $table->string('status', 30)->default('belum ditebus');
+            $table->string('status', 30)->default('belum dibayar');
             // $table->unsignedInteger('pasien_id');
             // $table->unsignedInteger('dokter_id');
             $table->timestamps();
