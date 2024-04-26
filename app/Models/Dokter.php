@@ -11,13 +11,13 @@ class Dokter extends Model
     use HasFactory;
     protected $primaryKey = 'id_dokter';
 
-    /**
-     * Get the user that owns the Dokter
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id_user');
+    }
+
+    public function poli(): BelongsTo
+    {
+        return $this->belongsTo(Poli::class, 'poli_id', 'id_poli');
     }
 }
