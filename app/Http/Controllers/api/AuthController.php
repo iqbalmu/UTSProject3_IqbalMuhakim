@@ -9,7 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Pasien;
 use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -62,10 +62,18 @@ class AuthController extends Controller
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw new HttpResponseException(response([
                 'errors' => 'username or password is wrong !!'
-            ]));
+            ], 400));
         }
 
-        $token = Str::uuid(); // nanti ganti pakai jwt
+        // $token = Str::uuid(); // nanti ganti pakai jwt
+        $token = Auth::attempt($data);
+
+        if (!$token) {
+            throw new HttpResponseException(response([
+                'errors' => 'unauthorized'
+            ], 401));
+        }
+
         return response()->json([
             'data' => [
                 'token' => $token

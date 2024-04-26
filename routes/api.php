@@ -25,11 +25,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
-// User Api
-Route::get('/user/profile', [UserController::class, 'getProfile']);
-Route::patch('/user/profile', [UserController::class, 'updateProfile']);
-Route::patch('/user/change-passwor', [UserController::class, 'changePassword']);
+Route::middleware('verifyJwt')->group(function () {
+    // User Api
+    Route::prefix('user')->controller(UserController::class)->group(function () {
+        Route::get('/profile', 'getProfile');
+        Route::patch('/profile', 'updateProfile');
+        Route::patch('/change-password', 'changePassword');
+    });
+
+});
 
 // Dokter Api
 Route::get('/dokter', [DokterController::class, 'index']);
-

@@ -94,8 +94,10 @@ Headers :
 Request Body :
 
 ```json
-{    
-    "password": "new password",
+{
+    "password" : "password",
+    "newPassword" : "new password",
+    "confirmPassword" : "new password"
 }
 ```
 

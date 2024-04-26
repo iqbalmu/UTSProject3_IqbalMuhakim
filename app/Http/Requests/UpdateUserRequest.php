@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LoginRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,18 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => 'required|email|max:50',
-            "password" => 'required|max:50',
+            "nama" => "nullable",
+            "email" => "nullable|email",
+            "nik" => "nullable",
+            "jenis_kelamin" => "nullable",
+            "nomor_hp" => "nullable",
+            "profesi" => "nullable",
+            "alamat" => "nullable"
         ];
     }
 
-    public function failedValidation(Validator $validator){
+    protected function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response([
             'errors' => $validator->getMessageBag()
         ], 400));
