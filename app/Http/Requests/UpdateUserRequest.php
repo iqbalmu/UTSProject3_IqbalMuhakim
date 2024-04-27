@@ -24,13 +24,13 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nama" => "nullable",
-            "email" => "nullable|email",
-            "nik" => "nullable",
-            "jenis_kelamin" => "nullable",
-            "nomor_hp" => "nullable",
-            "profesi" => "nullable",
-            "alamat" => "nullable"
+            "nama" => "required",
+            "email" => "required|email",
+            "nik" => "required",
+            "jenis_kelamin" => "required",
+            "nomor_hp" => "required",
+            "profesi" => "required",
+            "alamat" => "required"
         ];
     }
 

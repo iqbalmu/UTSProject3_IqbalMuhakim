@@ -74,3 +74,23 @@ Response Body Errors :
     "errors": "email already exist"
 }
 ```
+
+## Logout
+
+Endpoint : DELETE /api/auth/logout
+
+Response Body Success :
+
+```json
+{
+    "message": "succes logout user"
+}
+```
+
+Response Body Errors :
+
+```json
+{
+    "errors": "unauthorized"
+}
+```
