@@ -32,7 +32,7 @@ class AuthController extends Controller
                 ->withInput(['email' => $validatedData['email']]);
         }
 
-        if (Auth::attempt($validatedData)) {
+        if (Auth::guard('web')->attempt($validatedData)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }

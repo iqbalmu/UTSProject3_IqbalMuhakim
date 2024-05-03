@@ -36,7 +36,7 @@ class UserController extends Controller
             if ($emailExist) {
                 throw new HttpResponseException(response([
                     'errors' => 'email is already in use !!'
-                ]));
+                ], 400));
             }
         }
 
@@ -46,7 +46,7 @@ class UserController extends Controller
             if ($phoneExist) {
                 throw new HttpResponseException(response([
                     'errors' => 'phone number is already in use !!'
-                ]));
+                ], 400));
             }
         }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
             if ($phoneExist) {
                 throw new HttpResponseException(response([
                     'errors' => 'NIK is already in use !!'
-                ]));
+                ], 400));
             }
         }
 
@@ -83,12 +83,11 @@ class UserController extends Controller
             return response()->json([
                 'data' => $resource,
                 'message' => 'user profile updated'
-            ]);
+            ], 200);
         } catch (\Throwable $th) {
             throw new HttpResponseException(response([
-                'errors' => $th->getMessage(),
-                'trace' => $th->getTrace()
-            ]));
+                'errors' => $th->getMessage()
+            ], $th->getCode()));
         }
     }
 
@@ -103,14 +102,14 @@ class UserController extends Controller
         if (!$matchPassword) {
             throw new HttpResponseException(response([
                 'errors' => "Wrong Password !!"
-            ]));
+            ], 400));
         }
 
         // confirm new password
         if ($data['newPassword'] !== $data['confirmPassword']) {
             throw new HttpResponseException(response([
                 'errors' => "Confirm password does not match"
-            ]));
+            ], 400));
         }
 
         // update password

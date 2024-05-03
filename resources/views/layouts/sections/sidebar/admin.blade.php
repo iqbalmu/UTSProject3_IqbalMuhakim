@@ -7,37 +7,6 @@
         </a>
     </li>
 
-    {{-- Admisi --}}
-    <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Admisi</span>
-    </li>
-    <li class="menu-item @if ($activeMenu == 'antrian') active @endif">
-        <a href="{{ route('antrian.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-envelope"></i>
-            <div data-i18n="Antrian">Antrian</div>
-            <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">3</div>
-        </a>
-    </li>
-    {{-- <li class="menu-item @if ($activeMenu == 'janji-temu') active @endif">
-        <a href="{{ route('temu.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-chat"></i>
-            <div data-i18n="">Janji Temu</div>
-            <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">4</div>
-        </a>
-    </li> --}}
-    <li class="menu-item @if ($activeMenu == 'jadwal-praktek') active @endif">
-        <a href="{{ route('jpraktek.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-chat"></i>
-            <div data-i18n="">Jadwal Praktek</div>
-        </a>
-    </li>
-    {{-- <li class="menu-item @if ($activeMenu == 'diagnosa') active @endif">
-        <a href="{{ route('diagnosa.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-chat"></i>
-            <div data-i18n="">Diagnosa</div>
-        </a>
-    </li> --}}
-
     <!-- Data -->
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Data</span></li>
     <li class="menu-item @if ($activeMenu == 'pasien' || $activeMenu == 'pasien-new') active open @endif">
@@ -73,25 +42,6 @@
             <li class="menu-item @if ($activeMenu == 'dokter-new') active @endif ">
                 <a href="/dokter/new" class="menu-link">
                     <div data-i18n="Error">Dokter Baru</div>
-                </a>
-            </li>
-        </ul>
-    </li>
-
-    <li class="menu-item @if ($activeMenu == 'obat' || $activeMenu == 'obat-input') active open @endif">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
-            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-            <div data-i18n="Authentications">Obat</div>
-        </a>
-        <ul class="menu-sub">
-            <li class="menu-item @if ($activeMenu == 'obat') active @endif ">
-                <a href="/obat" class="menu-link">
-                    <div data-i18n="Basic">Data Obat</div>
-                </a>
-            </li>
-            <li class="menu-item @if ($activeMenu == 'obat-input') active @endif ">
-                <a href="/obat/input" class="menu-link">
-                    <div data-i18n="Basic">Input Obat</div>
                 </a>
             </li>
         </ul>

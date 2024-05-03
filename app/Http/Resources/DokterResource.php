@@ -24,6 +24,7 @@ class DokterResource extends JsonResource
             'nomor_sip' => $this->nomor_sip,
             'spesialisasi' => $this->spesialisasi,
             'poli' => PoliResource::make($this->whenLoaded('poli')),
+            'jadwal' => JadwalCollection::make($this->whenLoaded('jadwal'))
         ];
     }
 }

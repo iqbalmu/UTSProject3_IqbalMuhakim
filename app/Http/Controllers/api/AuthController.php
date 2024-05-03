@@ -65,9 +65,7 @@ class AuthController extends Controller
             ], 400));
         }
 
-        // $token = Str::uuid(); // nanti ganti pakai jwt
-        $token = Auth::attempt($data);
-
+        $token = Auth::guard('api')->attempt($data);
         if (!$token) {
             throw new HttpResponseException(response([
                 'errors' => 'unauthorized'
