@@ -27,8 +27,8 @@ return new class extends Migration
             $table->unsignedInteger('poli_id');
             $table->timestamps();
 
-            $table->foreign('poli_id')->references('id_poli')->on('polis');
-            $table->foreign('user_id')->references('id_user')->on('users');
+            $table->foreign('poli_id')->references('id_poli')->on('polis')->onDelete('cascade');
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('status', 10)->default('menunggu');
             $table->timestamps();
 
-            $table->foreign('poli_id')->references('id_poli')->on('polis');
-            $table->foreign('mrn')->references('mrn')->on('pasiens');
+            $table->foreign('poli_id')->references('id_poli')->on('polis')->onDelete('cascade');
+            $table->foreign('mrn')->references('mrn')->on('pasiens')->onDelete('cascade');
         });
     }
 

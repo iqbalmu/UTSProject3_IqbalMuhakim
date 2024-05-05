@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdmisiController;
 use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\ApotekerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiagnosaController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\JadwalPraktekController;
 use App\Http\Controllers\JanjiTemuController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PoliController;
 use App\Http\Controllers\RekamMedikController;
 use App\Http\Controllers\TebusObatController;
 use Illuminate\Support\Facades\Route;
@@ -25,20 +28,44 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth.check')->group(function () {
-    // Dashboard Routes
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware('role:admin')->group(function () {
         Route::get('/pasien/{id}/edit', [PasienController::class, 'edit'])->name('pasien.edit');
         Route::put('/pasien/{id}', [PasienController::class, 'update'])->name('pasien.update');
-        Route::get('/pasien/new/{step?}', [PasienController::class, 'create'])->name('pasien.create');
-        Route::post('/pasien/new/account', [PasienController::class, 'storeAccount'])->name('pasien.create.account');
-        Route::post('/pasien/new/profile', [PasienController::class, 'storeProfile'])->name('pasien.create.profile');
+        Route::get('/pasien/new', [PasienController::class, 'create'])->name('pasien.create');
+        Route::post('/pasien/new', [PasienController::class, 'store'])->name('pasien.store');
+        Route::delete('/pasien/{id}', [PasienController::class, 'destroy'])->name('pasien.destroy');
+        // Route::get('/pasien/new/{step?}', [PasienController::class, 'create'])->name('pasien.create');
+        // Route::post('/pasien/new/account', [PasienController::class, 'storeAccount'])->name('pasien.create.account');
+        // Route::post('/pasien/new/profile', [PasienController::class, 'storeProfile'])->name('pasien.create.profile');
 
-        Route::get('/dokter/new', [DokterController::class, 'create'])->name('dokter.create');
+        Route::get('/dokter/create', [DokterController::class, 'create'])->name('dokter.create');
         Route::get('/dokter/{id}/edit', [DokterController::class, 'edit'])->name('dokter.edit');
         Route::post('/dokter', [DokterController::class, 'store'])->name('dokter.store');
         Route::put('/dokter/{id}', [DokterController::class, 'update'])->name('dokter.update');
+        Route::delete('/dokter/{id}', [DokterController::class, 'destroy'])->name('dokter.destroy');
+
+        Route::get('/poli', [PoliController::class, 'index'])->name('poli.index');
+        Route::post('/poli', [PoliController::class, 'store'])->name('poli.store');
+        Route::put('/poli', [PoliController::class, 'update'])->name('poli.update');
+        Route::delete('/poli', [PoliController::class, 'destroy'])->name('poli.destroy');
+
+        Route::get('/apoteker', [ApotekerController::class, 'index'])->name('apoteker.index');
+        Route::get('/apoteker/{id}/show', [ApotekerController::class, 'show'])->name('apoteker.show');
+        Route::get('/apoteker/create', [ApotekerController::class, 'create'])->name('apoteker.create');
+        Route::post('/apoteker', [ApotekerController::class, 'store'])->name('apoteker.store');
+        Route::get('/apoteker/{id}/edit', [ApotekerController::class, 'edit'])->name('apoteker.edit');
+        Route::put('/apoteker/{id}', [ApotekerController::class, 'update'])->name('apoteker.update');
+        Route::delete('/apoteker/{id}', [ApotekerController::class, 'destroy'])->name('apoteker.destroy');
+
+        Route::get('/admisi', [AdmisiController::class, 'index'])->name('admisi.index');
+        Route::get('/admisi/{id}/show', [AdmisiController::class, 'show'])->name('admisi.show');
+        Route::get('/admisi/create', [AdmisiController::class, 'create'])->name('admisi.create');
+        Route::post('/admisi', [AdmisiController::class, 'store'])->name('admisi.store');
+        Route::get('/admisi/{id}/edit', [AdmisiController::class, 'edit'])->name('admisi.edit');
+        Route::put('/admisi/{id}', [AdmisiController::class, 'update'])->name('admisi.update');
+        Route::delete('/admisi/{id}', [AdmisiController::class, 'destroy'])->name('admisi.destroy');
     });
 
     Route::middleware('role:apoteker')->group(function () {
@@ -83,7 +110,6 @@ Route::middleware('auth.check')->group(function () {
     Route::get('/dokter', [DokterController::class, 'index'])->name('dokter.index')->middleware('role:admin,admisi');
 });
 
-// Authentication Routes
 Route::get('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/auth/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/auth/login', [AuthController::class, 'signin'])->name('auth.signin');

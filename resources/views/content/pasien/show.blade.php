@@ -58,7 +58,16 @@
                 </div>
 
                 <div class="card-footer">
-                    <a href="{{ route('pasien.index') }}" class="btn btn-outline-secondary">Back</a>
+                    <div class="d-flex gap-1">
+                        <a href="{{ route('pasien.index') }}" class="btn btn-secondary">Back</a>
+                        @if (Auth::user()->role_id === 1)
+                            <a href="{{ route('pasien.edit', $pasien->id_user) }}" class="btn btn-primary">Edit</a>
+                            <button type="button" class="btn btn-outline-danger ms-auto" data-bs-toggle="modal"
+                                data-bs-target="#modalDeletePasien">
+                                Delete
+                            </button>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +81,8 @@
                             @foreach ($rekamMediks as $mrn)
                                 <a href="{{ route('pasien.mrn', ['userId' => $pasien->id_user, 'mrnId' => $mrn->id_rekam_medik]) }}"
                                     class="list-group-item list-group-item-action">
-                                    {{ $loop->iteration }} ) {{ $mrn->mrn }}-{{$mrn->id_rekam_medik}} {{$mrn->created_at}}
+                                    {{ $loop->iteration }} ) {{ $mrn->mrn }}-{{ $mrn->id_rekam_medik }}
+                                    {{ $mrn->created_at }}
                                 </a>
                             @endforeach
                         </div>
@@ -81,4 +91,6 @@
             </div>
         </div>
     </div>
+
+    @include('content.pasien.modal.delete')
 @endsection

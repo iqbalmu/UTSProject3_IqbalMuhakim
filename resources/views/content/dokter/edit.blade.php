@@ -58,17 +58,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            {{-- <div class="mb-3 col-md-6">
-                                <label for="username" class="form-label">Username</label>
-                                <input class="form-control @error('username') is-invalid @enderror" type="text"
-                                    id="username" name="username" placeholder="JohnD"
-                                    value="{{ old('username', $dokter->username) }}" />
-                                @error('username')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
                             <div class="form-password-toggle mb-3 col-md-6">
                                 <label class="form-label" for="basic-default-password32">Password</label>
                                 <div class="input-group input-group-merge">
@@ -134,6 +123,20 @@
                                     id="nomor_sip" name="nomor_sip" placeholder="11232321321241231"
                                     value="{{ old('nomor_sip', $dokter->dokter->nomor_sip) }}" />
                                 @error('nomor_sip')
+                                    <div class="form-text text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="poli" class="form-label">Poli</label>
+                                <select name="poli_id" id="poli_id" class="form-control">
+                                    <option value="{{ $dokter->dokter->poli_id }}">{{$dokter->dokter->poli->nama}}</option>
+                                    @foreach ($poli as $item)
+                                        <option value="{{ $item->id_poli }}">{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                                @error('poli_id')
                                     <div class="form-text text-danger">
                                         {{ $message }}
                                     </div>

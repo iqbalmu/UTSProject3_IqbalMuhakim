@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\Poli;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,14 +16,15 @@ class DokterController extends Controller
         $data = User::has('dokter')->where('role_id', 3)->get();
         return view('content.dokter.index', [
             'activeMenu' => 'dokter',
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
     public function create()
     {
         return view('content.dokter.create', [
-            'activeMenu' => 'dokter-new'
+            'activeMenu' => 'dokter-new',
+            'poli' => Poli::all()
         ]);
     }
 
@@ -32,6 +34,7 @@ class DokterController extends Controller
         return view('content.dokter.edit', [
             'activeMenu' => 'dokter',
             'dokter' => $dokter,
+            'poli' => Poli::all()
         ]);
     }
 
@@ -48,12 +51,12 @@ class DokterController extends Controller
     {
         $validatedData = $request->validate([
             "nama" => 'required',
-            // "username" => 'required|unique:users',
             "password" => 'required|min:8',
             "email" => 'required|unique:users',
             "nomor_hp" => 'required|unique:users|min:10',
             'nomor_str' => 'required|unique:dokters|min:10',
             'nomor_sip' => 'required|unique:dokters|min:10',
+            'poli_id' => 'required',
             'spesialisasi' => 'required',
             'foto' => 'required',
         ]);
@@ -78,6 +81,7 @@ class DokterController extends Controller
                 $dokter = new Dokter();
                 $dokter->nomor_str = $validatedData['nomor_str'];
                 $dokter->nomor_sip = $validatedData['nomor_sip'];
+                $dokter->poli_id = $validatedData['poli_id'];
                 $dokter->spesialisasi = $validatedData['spesialisasi'];
                 $dokter->foto = $fileName;
                 $dokter->user_id = $user->id_user;
@@ -103,16 +107,15 @@ class DokterController extends Controller
     {
         $validatedData = $request->validate([
             "nama" => 'required',
-            // "username" => 'required',
             "password" => 'nullable',
             "email" => 'required',
             "nomor_hp" => 'required',
             'nomor_str' => 'required',
             'nomor_sip' => 'required',
+            'poli_id' => 'required',
             'spesialisasi' => 'required',
             'foto' => 'nullable',
         ]);
-
 
         try {
             DB::transaction(function () use ($validatedData, $request, $idDokter) {
@@ -130,7 +133,6 @@ class DokterController extends Controller
                 $password = $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password;
 
                 $user->nama = $validatedData['nama'];
-                // $user->username = $validatedData['username'];
                 $user->email = $validatedData['email'];
                 $user->password = $password;
                 $user->nomor_hp = $validatedData['nomor_hp'];
@@ -140,24 +142,35 @@ class DokterController extends Controller
                 $dokter = Dokter::where('user_id', $idDokter)->first();;
                 $dokter->nomor_str = $validatedData['nomor_str'];
                 $dokter->nomor_sip = $validatedData['nomor_sip'];
+                $dokter->poli_id = $validatedData['poli_id'];
                 $dokter->spesialisasi = $validatedData['spesialisasi'];
                 $dokter->foto = $fileName;
                 $dokter->user_id = $user->id_user;
                 $dokter->save();
 
-                notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Diperbarui');
             });
+
+            notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Diperbarui');
+            return redirect()->route('dokter.show', $idDokter);
         } catch (\Exception $exception) {
             DB::rollBack();
 
-            dd('Update Data Pasien Failed: ' . $exception->getMessage());
+            // dd('Update Data Dokter Failed: ' . $exception->getMessage());
             // if (file_exists($filePath)) {
             //     unlink($filePath);
             // }
 
-            notyf()->position('y', 'top')->addSuccess('Data Dokter Gagal Ditambahkan');
+            notyf()->position('y', 'top')->addError('Data Dokter Gagal Ditambahkan');
         }
 
         return redirect()->back();
+    }
+
+    public function destroy($idUser)
+    {
+        User::destroy($idUser);
+
+        notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Dihapus');
+        return redirect()->route('dokter.index');
     }
 }

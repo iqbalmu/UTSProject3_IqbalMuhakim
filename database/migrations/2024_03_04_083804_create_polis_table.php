@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('polis', function (Blueprint $table) {
             $table->increments('id_poli');
             $table->string('nama', 30);
-            $table->string('deskripsi', 30);
+            $table->text('deskripsi');
             $table->timestamps();
         });
     }

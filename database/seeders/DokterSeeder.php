@@ -44,7 +44,7 @@ class DokterSeeder extends Seeder
         $dokter->user_id = $user->id_user;
         $dokter->nomor_str = '123456789012345';
         $dokter->nomor_sip = '123456789012345';
-        $dokter->foto = 'sample.jpeg';
+        $dokter->foto = 'sample.png';
         $dokter->spesialisasi = 'Bedah Hati';
         $dokter->poli_id = 1;
         $dokter->save();
@@ -61,7 +61,7 @@ class DokterSeeder extends Seeder
         $dokter2->user_id = $user2->id_user;
         $dokter2->nomor_str = '123456789012345';
         $dokter2->nomor_sip = '123456789012345';
-        $dokter2->foto = 'sample.jpeg';
+        $dokter2->foto = 'sample.png';
         $dokter2->spesialisasi = 'Bedah Hati';
         $dokter2->poli_id = 1;
         $dokter2->save();

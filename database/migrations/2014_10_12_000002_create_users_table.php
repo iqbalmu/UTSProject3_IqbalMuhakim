@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('role_id');
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id_role')->on('roles');
+            $table->foreign('role_id')->references('id_role')->on('roles')->onDelete('cascade');
         });
     }
 

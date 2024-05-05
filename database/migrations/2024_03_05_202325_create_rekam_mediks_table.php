@@ -32,10 +32,10 @@ return new class extends Migration
             $table->unsignedInteger('resep_id');
             $table->timestamps();
 
-            $table->foreign('mrn')->references('mrn')->on('pasiens');
-            $table->foreign('dokter_id')->references('id_dokter')->on('dokters');
-            $table->foreign('pemeriksaan_id')->references('id_pemeriksaan')->on('pemeriksaans');
-            $table->foreign('resep_id')->references('id_resep')->on('reseps');
+            $table->foreign('mrn')->references('mrn')->on('pasiens')->onDelete('cascade');
+            $table->foreign('dokter_id')->references('id_dokter')->on('dokters')->onDelete('cascade');
+            $table->foreign('pemeriksaan_id')->references('id_pemeriksaan')->on('pemeriksaans')->onDelete('cascade');
+            $table->foreign('resep_id')->references('id_resep')->on('reseps')->onDelete('cascade');
         });
     }
 

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedInteger('dokter_id');
             $table->timestamps();
 
-            $table->foreign('pasien_id')->references('id_pasien')->on('pasiens');
-            $table->foreign('dokter_id')->references('id_dokter')->on('dokters');
+            $table->foreign('pasien_id')->references('id_pasien')->on('pasiens')->onDelete('cascade');
+            $table->foreign('dokter_id')->references('id_dokter')->on('dokters')->onDelete('cascade');
         });
     }
 

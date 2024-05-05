@@ -25,17 +25,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            {{-- <div class="mb-3 col-md-6">
-                                <label for="username" class="form-label">Username</label>
-                                <input class="form-control @error('username') is-invalid @enderror" type="text"
-                                    id="username" name="username" placeholder="JohnD"
-                                    value="{{ old('username', $pasien->username) }}" />
-                                @error('username')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
                             <div class="form-password-toggle mb-3 col-md-6">
                                 <label class="form-label" for="basic-default-password32">Password</label>
                                 <div class="input-group input-group-merge">
@@ -95,28 +84,6 @@
                                     </div>
                                 @enderror
                             </div>
-                            {{-- <div class="mb-3 col-md-6">
-                                <label for="tinggi_badan" class="form-label">Tinggi Badan</label>
-                                <input class="form-control @error('tinggi_badan') is-invalid @enderror" type="number"
-                                    name="tinggi_badan" id="tinggi_badan" placeholder="175"
-                                    value="{{ old('tinggi_badan', $pasien->pasien->tinggi_badan) }}" />
-                                @error('tinggi_badan')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="berat_badan" class="form-label">Berat Badan</label>
-                                <input class="form-control @error('berat_badan') is-invalid @enderror " type="number"
-                                    name="berat_badan" id="berat_badan" placeholder="65"
-                                    value="{{ old('berat_badan', $pasien->pasien->berat_badan) }}" />
-                                @error('berat_badan')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
                             <div class="mb-3 col-md-6">
                                 <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                 <select id="jenis_kelamin"
@@ -159,7 +126,7 @@
                         </div>
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
-                            <a href="{{ route('pasien.index') }}" class="btn btn-outline-secondary">Back</a>
+                            <a href="{{ route('pasien.show', $pasien->id_user) }}" class="btn btn-outline-secondary">Back</a>
                         </div>
                     </div>
                 </form>

@@ -49,17 +49,6 @@
                                 </div>
                             @enderror
                         </div>
-                        {{-- <div class="mb-3 col-md-6">
-                            <label for="username" class="form-label">Username</label>
-                            <input class="form-control @error('username') is-invalid @enderror" type="text"
-                                id="username" name="username" placeholder="JohnD"
-                                value="{{ old('username', $dokter->username) }}" disabled />
-                            @error('username')
-                                <div class="form-text text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div> --}}
                         <div class="form-password-toggle mb-3 col-md-6">
                             <label class="form-label" for="basic-default-password32">Password</label>
                             <div class="input-group input-group-merge">
@@ -132,6 +121,17 @@
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
+                            <label for="poli" class="form-label">Poli</label>
+                            <select name="poli_id" id="poli_id" class="form-control" disabled>
+                                <option value="{{ $dokter->dokter->poli_id }}">{{ $dokter->dokter->poli->nama }}</option>
+                            </select>
+                            @error('poli_id')
+                                <div class="form-text text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3 col-md-6">
                             <label for="spesialisasi" class="form-label">Spesialisasi</label>
                             <input class="form-control @error('spesialisasi') is-invalid @enderror" type="text"
                                 name="spesialisasi" id="spesialisasi" placeholder="Bedah Otak"
@@ -143,12 +143,26 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="mt-2">
-                        <a href="{{ route('dokter.edit', $dokter->id_user) }}" class="btn btn-primary me-2">Edit</a>
-                        <a href="{{ route('dokter.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                    <div class="mt-2 d-flex">
+                        <div>
+                            <a href="{{ route('dokter.index') }}" class="btn btn-outline-secondary">Back</a>
+                            @if (Auth::user()->role_id === 1)
+                                <a href="{{ route('dokter.edit', $dokter->id_user) }}"
+                                    class="btn btn-primary me-2">Edit</a>
+                            @endif
+                        </div>
+                        @if (Auth::user()->role_id === 1)
+                            <button type="button" class="btn btn-outline-danger ms-auto" data-bs-toggle="modal"
+                                data-bs-target="#modalDeleteDokter" data-id={{ $dokter->id_user }}>
+                                Delete
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('content.dokter.modal.delete')
+
 @endsection

@@ -35,6 +35,9 @@ class AuthController extends Controller
         if (Auth::guard('web')->attempt($validatedData)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
+        } else {
+            return redirect()->back()
+                ->withErrors(['email' => 'username or password is wrong !!!']);
         }
     }
 

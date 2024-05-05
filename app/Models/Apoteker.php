@@ -5,14 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Poli extends Model
+class Apoteker extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'id_poli';
-
-    protected $fillable = [
-        'nama',
-        'deskripsi'
-    ];
 }

@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('syarat', 30);
             $table->timestamps();
 
-            $table->foreign('obat_id')->references('id_obat')->on('obats');
-            $table->foreign('resep_id')->references('id_resep')->on('reseps');
+            $table->foreign('obat_id')->references('id_obat')->on('obats')->onDelete('cascade');
+            $table->foreign('resep_id')->references('id_resep')->on('reseps')->onDelete('cascade');
         });
     }
 

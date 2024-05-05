@@ -1,22 +1,25 @@
 @extends('layouts.main')
 
-@section('title', 'Pasien Baru')
+@section('title', 'Apoteker')
 
-@section('header', 'Form Pasien Baru')
+@section('header', 'Update Data Apoteker')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
-                <form action="" method="post">
+                <form action="{{ route('apoteker.update', $user->id_user) }}" method="post">
                     @csrf
+                    @method('put')
+
                     <h5 class="card-header">Account</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="nama" class="form-label">Nama Lengkap</label>
-                                <input class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}"
-                                    type="text" id="nama" name="nama" placeholder="Doe" />
+                                <input class="form-control @error('nama') is-invalid @enderror"
+                                    value="{{ old('nama', $user->nama) }}" type="text" id="nama" name="nama"
+                                    placeholder="Doe" />
                                 @error('nama')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -45,7 +48,7 @@
                                 <label for="email" class="form-label">E-mail</label>
                                 <input class="form-control @error('email') is-invalid @enderror" type="text"
                                     id="email" name="email" placeholder="john.doe@example.com"
-                                    value="{{ old('email') }}" />
+                                    value="{{ old('email', $user->email) }}" />
                                 @error('email')
                                     <div class="form-text text-danger">
                                         {{ $message }}
@@ -60,7 +63,7 @@
                                     <input type="text" id="nomor_hp" name="nomor_hp"
                                         class="form-control
                                     @error('nomor_hp') is-invalid @enderror"
-                                        placeholder="0821 9650 6900" value="{{ old('nomor_hp') }}" />
+                                        placeholder="0821 9650 6900" value="{{ old('nomor_hp', $user->nomor_hp) }}" />
                                 </div>
                                 @error('nomor_hp')
                                     <div class="form-text text-danger">
@@ -69,59 +72,10 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
 
-                    <h5 class="card-header">Profile</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="nik" class="form-label">NIK</label>
-                                <input class="form-control @error('nik') is-invalid @enderror" type="text" id="nik"
-                                    name="nik" placeholder="11232321321241231" value="{{ old('nik') }}" />
-                                @error('nik')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3 col-md-6">
-                                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                                    <option value="">--</option>
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
-                                </select>
-                                @error('jenis_kelamin')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="profesi" class="form-label">Profesi</label>
-                                <input class="form-control @error('profesi') is-invalid @enderror" type="text"
-                                    name="profesi" id="profesi" placeholder="Bedah Otak" value="{{ old('profesi') }}" />
-                                @error('profesi')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="alamat" class="form-label">Alamat</label>
-                                <input class="form-control @error('alamat') is-invalid @enderror" type="text"
-                                    name="alamat" id="alamat" placeholder="Bedah Otak" value="{{ old('alamat') }}" />
-                                @error('alamat')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Submit</button>
-                            <a href="{{ route('pasien.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                            <a href="{{ route('apoteker.index') }}" class="btn btn-outline-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>

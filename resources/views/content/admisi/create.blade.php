@@ -1,14 +1,14 @@
 @extends('layouts.main')
 
-@section('title', 'Pasien Baru')
+@section('title', 'Admisi Baru')
 
-@section('header', 'Form Pasien Baru')
+@section('header', 'Form Admisi Baru')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
-                <form action="" method="post">
+                <form action="{{ route('admisi.store') }}" method="post">
                     @csrf
                     <h5 class="card-header">Account</h5>
                     <div class="card-body">
@@ -23,7 +23,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <div class="form-password-toggle mb-3 col-md-6">
                                 <label class="form-label" for="basic-default-password32">Password</label>
                                 <div class="input-group input-group-merge">
@@ -40,7 +39,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">E-mail</label>
                                 <input class="form-control @error('email') is-invalid @enderror" type="text"
@@ -52,7 +50,6 @@
                                     </div>
                                 @enderror
                             </div>
-
                             <div class="mb-3 col-md-6">
                                 <label class="form-label" for="nomor_hp">Nomor HP</label>
                                 <div class="input-group input-group-merge">
@@ -68,60 +65,10 @@
                                     </div>
                                 @enderror
                             </div>
-                        </div>
-                    </div>
-
-                    <h5 class="card-header">Profile</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="mb-3 col-md-6">
-                                <label for="nik" class="form-label">NIK</label>
-                                <input class="form-control @error('nik') is-invalid @enderror" type="text" id="nik"
-                                    name="nik" placeholder="11232321321241231" value="{{ old('nik') }}" />
-                                @error('nik')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                <a href="{{ route('admisi.index') }}" class="btn btn-outline-secondary">Cancel</a>
                             </div>
-
-                            <div class="mb-3 col-md-6">
-                                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                                    <option value="">--</option>
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
-                                </select>
-                                @error('jenis_kelamin')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="profesi" class="form-label">Profesi</label>
-                                <input class="form-control @error('profesi') is-invalid @enderror" type="text"
-                                    name="profesi" id="profesi" placeholder="Bedah Otak" value="{{ old('profesi') }}" />
-                                @error('profesi')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="alamat" class="form-label">Alamat</label>
-                                <input class="form-control @error('alamat') is-invalid @enderror" type="text"
-                                    name="alamat" id="alamat" placeholder="Bedah Otak" value="{{ old('alamat') }}" />
-                                @error('alamat')
-                                    <div class="form-text text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            <button type="submit" class="btn btn-primary me-2">Submit</button>
-                            <a href="{{ route('pasien.index') }}" class="btn btn-outline-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>
