@@ -21,24 +21,27 @@
     <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-kesehatan-tab" data-bs-toggle="pill" data-bs-target="#pills-kesehatan"
-                type="button" role="tab" aria-controls="pills-kesehatan" aria-selected="true">Riwayat &
-                Keluhan</button>
+                type="button" role="tab" aria-controls="pills-kesehatan" aria-selected="true" accesskey="r">Riwayat &
+                Keluhan [R]</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="pills-pemeriksaan-tab" data-bs-toggle="pill" data-bs-target="#pills-pemeriksaan"
-                type="button" role="tab" aria-controls="pills-pemeriksaan" aria-selected="false">
-                Pemeriksaan</button>
+                type="button" role="tab" aria-controls="pills-pemeriksaan" aria-selected="false" accesskey="p">
+                Pemeriksaan [P]</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="pills-diagnosa-tab" data-bs-toggle="pill" data-bs-target="#pills-diagnosa"
-                type="button" role="tab" aria-controls="pills-diagnosa" aria-selected="false">Diagnosa</button>
+                type="button" role="tab" aria-controls="pills-diagnosa" aria-selected="false" accesskey="g">Diagnosa
+                [G]</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="pills-obat-tab" data-bs-toggle="pill" data-bs-target="#pills-obat" type="button"
-                role="tab" aria-controls="pills-obat" aria-selected="false">Obat</button>
+                role="tab" aria-controls="pills-obat" aria-selected="false" accesskey="o">Obat [O]</button>
         </li>
     </ul>
-    <form action="/antrian/{{ $antrian }}/poli/{{ $poli }}/pasien/{{ $mrn }}" method="post">
+    <form
+        action="/antrian/{{ $antrian }}?poli_id={{ $poli }}&mrn={{ $mrn }}&tanggal={{ $tanggal }}"
+        method="post">
         @csrf
         <div class="tab-content p-0" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-kesehatan" role="tabpanel"

@@ -15,14 +15,33 @@ class AntrianController extends Controller
     public function index(Request $request)
     {
         $tanggal = $request->input("tanggal") ?? Carbon::today()->format('Y-m-d');
-        $antrian = Antrian::where("tanggal", $tanggal)->get();
+        $poli = $request->input('poli_id');
+        // dd($tanggal);
+        // $antrian = Antrian::query()->where('tanggal', $tanggal)
+        //     ->orWhere("poli_id", function ($query) use ($request) {
+        //         if ($request->has('poli_id')) {
+        //             $query->where('poli_id', $request->poli_id);
+        //         }
+        //     })->get();
+
+        $antrian = Antrian::query();
+        if ($request->filled('tanggal')) {
+            $antrian->where('tanggal', $tanggal);
+        }
+
+        if ($request->filled('poli_id')) {
+            $antrian->where('poli_id', $poli);
+        }
+
+        $data = $antrian->get();
 
         return view('content.antrian.index', [
             'activeMenu' => 'antrian',
             'pasiens' => Pasien::all(),
             'polis' => Poli::all(),
             'tanggal' => $tanggal,
-            'antrian' => $antrian,
+            'antrian' => $data,
+            'poli_id' => $poli
         ]);
     }
 

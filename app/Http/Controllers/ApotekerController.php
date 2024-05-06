@@ -92,7 +92,7 @@ class ApotekerController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required',
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'nullable',
             'nomor_hp' => 'required'
         ]);
 

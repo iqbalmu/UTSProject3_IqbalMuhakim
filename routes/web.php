@@ -86,8 +86,9 @@ Route::middleware('auth.check')->group(function () {
     });
 
     Route::middleware('role:dokter')->group(function () {
-        Route::get('/antrian/{nomor}/poli/{poli}/pasien/{mrn}', [DiagnosaController::class, 'get'])->name('diagnosa.get');
-        Route::post('/antrian/{nomor}/poli/{poli}/pasien/{mrn}', [DiagnosaController::class, 'diagnosa'])->name('diagnosa.store');
+        // Route::get('/antrian/{nomor}/poli/{poli}/pasien/{mrn}', [DiagnosaController::class, 'get'])->name('diagnosa.get');
+        Route::get('/antrian/{antrian}', [DiagnosaController::class, 'get'])->name('diagnosa.get');
+        Route::post('/antrian/{antrian}', [DiagnosaController::class, 'diagnosa'])->name('diagnosa.store');
     });
 
     Route::middleware('role:admisi,dokter')->group(function () {

@@ -1,6 +1,6 @@
 # Rekam Medik API Spec
 
-## Get Rekam Medik
+## List Rekam Medik
 
 Endpoint : GET /api/rekam-medik
 
@@ -12,17 +12,25 @@ Response Body Success :
 
 ```json
 {
-    "data": {
-        "mrn": "RM-1231231232141",
-        "nama": "jhon doe",
-        "email": "sample@mail.com",
-        "password": "password",
-        "nik": "1234567890123456",
-        "jenis_kelamin": "L",
-        "nomor_hp": "082196506900",
-        "profesi": "mahasiswa",
-        "alamat": "padang"
-    }
+    "data": [
+        {
+            "mrn": "RM-xxxxxxxxxxx",
+            "keluhan_utama": "xxxxxxx",
+            "diagnosis": "xxxxx",
+            "penatalaksanaan": "xxxxx",
+            "catatan_dokter": "xxxxx",
+            "created_at": "xxxxx",            
+        },
+        {
+            "mrn": "RM-xxxxxxxxxxx",
+            "keluhan_utama": "xxxxxxx",
+            "diagnosis": "xxxxx",
+            "penatalaksanaan": "xxxxx",
+            "catatan_dokter": "xxxxx",
+            "created_at": "xxxxx",            
+        },
+        
+    ]
 }
 ```
 
@@ -34,85 +42,43 @@ Response Body Errors :
 }
 ```
 
-## Update Profile
+## Get Rekam Medik
 
-Endpoint : PATCH /api/user/profile
+Endpoint : GET /api/rekam-medik/:id
 
 Headers :
 
 -   Authorization : token
 
-Request Body :
-
-```json
-{    
-    "nama": "jhon doe",
-    "email": "sample@mail.com",    
-    "nik": "1234567890123456",
-    "jenis_kelamin": "L",
-    "nomor_hp": "082196506900",
-    "profesi": "mahasiswa",
-    "alamat": "padang"
-}
-```
-
 Response Body Success :
 
 ```json
 {
-    "data": {
-        "mrn": "RM-1231231232141",
-        "nama": "jhon doe",
-        "email": "sample@mail.com",        
-        "nik": "1234567890123456",
-        "jenis_kelamin": "L",
-        "nomor_hp": "082196506900",
-        "profesi": "mahasiswa",
-        "alamat": "padang"
+    "mrn": "RM-xxxxxxxxxxx",
+    "keluhan_utama": "xxxxxxx",
+    "riwayat_kesehatan": "xxxxxxx",
+    "riwayat_obat": "xxxx",
+    "diagnosis": "xxxxx",
+    "penatalaksanaan": "xxxxx",
+    "catatan_dokter": "xxxxx",
+    "created_at": "xxxxx",
+    "dokter": {
+        "nomor_str": "xxxxxxxxxxx",
+        "nomor_sip": "xxxxxxxxxxx",
+        "spesialisasi": "xxxx"
     },
-    "message" : "User Profile Updated"
-}
-```
-
-Response Body Errors :
-
-```json
-{
-    "errors": "unauthorized"
-}
-```
-
-
-## Change Password
-
-Endpoint : PATCH /api/user/change-password
-
-Headers :
-
--   Authorization : token
-
-Request Body :
-
-```json
-{
-    "password" : "password",
-    "newPassword" : "new password",
-    "confirmPassword" : "new password"
-}
-```
-
-Response Body Success :
-
-```json
-{
-    "message" : "password updated"
-}
-```
-
-Response Body Errors :
-
-```json
-{
-    "errors": "unauthorized"
+    "pemeriksaan": {
+        "suhu": "xx",
+        "tekanan_darah": "xx",
+        "nadi": "xx",
+        "pernapasan": "xx",
+        "tinggi": "xx",
+        "berat": "xx"
+    },
+    "resep": {
+        "id_resep": "xxx",
+        "status": "xxxx",
+        "keterangan": "xxxxxxxxx"
+    }
 }
 ```

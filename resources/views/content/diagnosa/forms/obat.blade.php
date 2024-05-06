@@ -91,8 +91,8 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <a class="btn btn-sm btn-outline-primary" id="add-input">+</a>
-                <a class="btn btn-sm btn-outline-primary" id="remove-input">-</a>
+                <a class="btn btn-sm btn-outline-primary" id="add-input" accesskey="=">+</a>
+                <a class="btn btn-sm btn-outline-primary" id="remove-input" accesskey="-">-</a>
             </div>
         </div>
     </div>

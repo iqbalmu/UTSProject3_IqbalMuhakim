@@ -23,6 +23,7 @@
                 <tr>
                     <th>ID</th>
                     <th>dokter</th>
+                    <th>poli</th>
                     <th>spesialisasi</th>
                     <th>kontak</th>
                     <th>action</th>
@@ -38,6 +39,9 @@
                             <img src="{{ '/uploads/dokter/' . $user->dokter->foto }}" alt="foto dokter" alt="user-avatar"
                                 class="d-block rounded" height="70" width="70">
                             {{ $user->nama }}
+                        </td>
+                        <td>
+                            {{ $user->dokter->poli->nama }}
                         </td>
                         <td>
                             {{ $user->dokter->spesialisasi }}

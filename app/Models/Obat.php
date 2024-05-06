@@ -21,4 +21,6 @@ class Obat extends Model
         'keterangan',
         'user_id',
     ];
+
+    
 }

@@ -5,6 +5,8 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\DokterController;
 use App\Http\Controllers\api\JadwalPraktekController;
 use App\Http\Controllers\api\PoliController;
+use App\Http\Controllers\api\RekamMedikController;
+use App\Http\Controllers\api\ResepObatController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,16 @@ Route::middleware('verifyJwt')->group(function () {
     Route::controller(AntrianController::class)->group(function () {
         Route::get('/antrian', 'index');
         Route::post('/antrian', 'store');
+    });
+
+    Route::controller(RekamMedikController::class)->group(function () {
+        Route::get('/rekam-medik', 'index');
+        Route::get('/rekam-medik/{id}', 'show');
+    });
+
+    Route::controller(ResepObatController::class)->group(function () {
+        // Route::get('/resep-obat', 'index');
+        Route::get('/resep-obat/{id}', 'show');
     });
 
     Route::get('/poli', [PoliController::class, 'index']);

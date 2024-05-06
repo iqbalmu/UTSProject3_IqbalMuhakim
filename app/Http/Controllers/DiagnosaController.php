@@ -16,18 +16,19 @@ use Illuminate\Support\Facades\DB;
 
 class DiagnosaController extends Controller
 {
-    public function get($nomor, $poli, $mrn)
+    public function get(Request $request, $antrian)
     {
         return view('content.diagnosa.index', [
             'activeMenu' => 'diagnosa',
-            'antrian' => $nomor,
-            'poli' => $poli,
-            'mrn' => $mrn,
+            'antrian' => $antrian,
+            'poli' => $request->poli_id,
+            'mrn' => $request->mrn,
+            'tanggal' => $request->tanggal,
             'obats' => Obat::all(),
         ]);
     }
 
-    public function diagnosa(Request $request, $nomor, $poli, $mrn)
+    public function diagnosa(Request $request)
     {
         // validasi request
 
@@ -36,7 +37,7 @@ class DiagnosaController extends Controller
         $dokter = Dokter::select('id_dokter')->where('user_id', $userId)->first();
 
         try {
-            DB::transaction(function () use ($request, $dokter, $mrn, $nomor, $poli) {
+            DB::transaction(function () use ($request, $dokter) {
                 // store data pemeriksaan
                 $pemeriksaan = new Pemeriksaan();
                 $pemeriksaan->suhu = $request->suhu;
@@ -79,14 +80,20 @@ class DiagnosaController extends Controller
                 $rekamMedik->diagnosis = $request->diagnosis;
                 $rekamMedik->penatalaksanaan = $request->penatalaksanaan;
                 $rekamMedik->catatan_dokter = $request->catatan_dokter;
-                $rekamMedik->mrn = $mrn;
+                $rekamMedik->mrn = $request->mrn;
                 $rekamMedik->dokter_id = $dokter->id_dokter;
                 $rekamMedik->pemeriksaan_id = $pemeriksaan->id_pemeriksaan;
                 $rekamMedik->resep_id = $resep->id_resep;
                 $rekamMedik->save();
 
                 // Update Antrian
-                $antrian = Antrian::where('nomor', $nomor)->where('poli_id', $poli)->where('mrn', $mrn)->first();
+                $antrian = Antrian::where('nomor', $request->antrian)
+                    ->where('poli_id', $request->poli_id)
+                    ->where('mrn', $request->mrn)
+                    ->where(
+                        'tanggal',
+                        $request->tanggal
+                    )->first();
                 $antrian->status = 'Selesai';
                 $antrian->save();
 
@@ -95,6 +102,7 @@ class DiagnosaController extends Controller
         } catch (\Throwable $exception) {
             DB::rollBack();
             // dd('Update Data Pasien Failed: ' . $exception->getMessage());
+            dd($exception->getMessage());
             notyf()->position('y', 'top')->addSuccess('Data Gagal Ditambahkan');
         }
 

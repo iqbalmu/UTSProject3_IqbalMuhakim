@@ -4,6 +4,10 @@ $(document).ready(function () {
         $('#form-filter').submit()
     })
 
+    $('#filter-poli').change(function() {
+        $('#form-filter').submit()
+    })
+
     // select-2 modal
     $('#pasien').select2({
         dropdownParent: $('#modalAntrian')

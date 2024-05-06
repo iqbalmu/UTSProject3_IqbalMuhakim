@@ -89,6 +89,7 @@ class DokterController extends Controller
 
                 notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Ditambahkan');
             });
+            return redirect()->route('dokter.index');
         } catch (\Exception $exception) {
             DB::rollBack();
 
@@ -147,7 +148,6 @@ class DokterController extends Controller
                 $dokter->foto = $fileName;
                 $dokter->user_id = $user->id_user;
                 $dokter->save();
-
             });
 
             notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Diperbarui');
@@ -168,7 +168,14 @@ class DokterController extends Controller
 
     public function destroy($idUser)
     {
-        User::destroy($idUser);
+        $user = User::find($idUser);
+        if (!$user) {
+            notyf()->position('y', 'top')->addError('Data Dokter Tidak Ditemukan');
+            return redirect()->route('dokter.index');
+        }
+        
+        unlink('uploads/dokter/' . $user->dokter->foto);
+        $user->delete();
 
         notyf()->position('y', 'top')->addSuccess('Data Dokter Berhasil Dihapus');
         return redirect()->route('dokter.index');

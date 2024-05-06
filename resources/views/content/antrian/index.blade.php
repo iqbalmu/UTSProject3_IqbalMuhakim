@@ -37,17 +37,16 @@
                             value="{{ $tanggal }}">
                     </div>
                     <div class="col">
-                        <select name="poli" id="filter-poli" class="form-select">
-                            <option value="">Poli</option>
+                        <select name="poli_id" id="filter-poli" class="form-select">
+                            <option value="">poli</option>
+                            {{-- <option value="" selected>123</option> --}}
                             @foreach ($polis as $poli)
-                                <option value="{{ $poli->id_poli }}">{{ $poli->nama }}</option>
+                                <option value="{{ $poli->id_poli }}" @if ($poli->id_poli == $poli_id) selected @endif>
+                                    {{ $poli->nama }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                {{-- <button type="submit" class="btn btn btn-primary-outline" >
-                    <span class="tf-icons bx bx-pie-chart-alt me-1"></span>SET
-                </button> --}}
             </form>
 
             @if (auth()->user()->role_id === 2)
@@ -95,7 +94,7 @@
                         </td>
                         <td>
                             @if (auth()->user()->role_id === 3)
-                                <a href="/antrian/{{ $item->nomor }}/poli/{{$item->poli->id_poli}}/pasien/{{ $item->pasien->mrn }}"
+                                <a href="/antrian/{{ $item->nomor }}?poli_id={{ $item->poli->id_poli }}&mrn={{ $item->pasien->mrn }}&tanggal={{ $item->tanggal }}"
                                     class="btn btn-sm btn-primary">
                                     Diagnosa
                                 </a>
