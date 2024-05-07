@@ -49,7 +49,14 @@
                         <td>
                             Rp. {{ number_format($obat->harga) }}
                         </td>
-                        <td>{{ number_format($obat->stok) }}</td>
+                        <td>
+                            <span
+                                class="badge
+                                @if ($obat->stok == 'tersedia') bg-success
+                                @else bg-secondary @endif">
+                                {{ $obat->stok }}
+                            </span>
+                        </td>
                         <td class="text-center">
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i

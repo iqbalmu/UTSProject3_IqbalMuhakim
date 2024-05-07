@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RekamMedik;
+use App\Models\Resep;
 use Illuminate\Http\Request;
 
 class TebusObatController extends Controller
@@ -12,12 +13,17 @@ class TebusObatController extends Controller
      */
     public function index(Request $request)
     {
-        $rekamMedik = RekamMedik::where('mrn', $request->mrn)->latest()->first();
-        $resep = $rekamMedik ? $rekamMedik->resep : null;
+        // $rekamMedik = RekamMedik::where('mrn', $request->mrn)->latest()->limit(4)->get();
+        // $resep = $rekamMedik ? $rekamMedik->resep : null;
+        $reseps = Resep::whereHas('rmedik', function ($query) use ($request) {
+            $query->where('mrn', $request->mrn);
+        })->limit(4)->latest()->get();
+
+        // $resep = Resep::where('kode', $request->kode)->first();
 
         return view('content.tebus-obat.index', [
             'activeMenu' => 'tebus-obat',
-            'resep' => $resep
+            'reseps' => $reseps
         ]);
     }
 

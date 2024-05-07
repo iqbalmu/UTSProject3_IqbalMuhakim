@@ -50,7 +50,7 @@ Route::middleware('verifyJwt')->group(function () {
     });
 
     Route::controller(ResepObatController::class)->group(function () {
-        // Route::get('/resep-obat', 'index');
+        Route::get('/resep-obat', 'index');
         Route::get('/resep-obat/{id}', 'show');
     });
 

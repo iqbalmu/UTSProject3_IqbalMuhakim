@@ -1,5 +1,40 @@
 # Rekam Medik API Spec
 
+## List Resep Obat
+
+Endpoint : GET /api/resep-obat
+
+Headers :
+
+-   Authorization : token
+
+Response Body Success :
+
+```json
+{
+    "data": [
+        {
+            "id_resep": "xx",
+            "kode": "xx",
+            "keterangan": "xx"
+        },
+        {
+            "id_resep": "xx",
+            "kode": "xx",
+            "keterangan": "xx"
+        }
+    ]
+}
+```
+
+Response Body Errors :
+
+```json
+{
+    "errors": "unauthorized"
+}
+```
+
 ## Get Resep Obat
 
 Endpoint : GET /api/resep-obat/:id
@@ -14,7 +49,7 @@ Response Body Success :
 {
     "data": {
         "id_resep": "xx",
-        "status": "xx",
+        "kode": "xx",
         "keterangan": "xx",
         "obat": [
             {

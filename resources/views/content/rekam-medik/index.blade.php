@@ -132,8 +132,11 @@
             </div>
 
             <div class="card mb-3">
-                <h5 class="card-header">
+                <h5 class="card-header d-flex align-items-center justify-content-between">
                     Resep
+                    <small>
+                        {{ $rMedik->resep->kode }}
+                    </small>
                 </h5>
                 <div class="card-body">
                     <div class="list-group list-group-flush">

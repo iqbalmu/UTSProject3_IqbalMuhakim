@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Antrian;
 use App\Models\Dokter;
 use App\Models\Obat;
+use App\Models\Pembayaran;
 use App\Models\Pemeriksaan;
 use App\Models\RekamMedik;
 use App\Models\Resep;
@@ -58,7 +59,7 @@ class DiagnosaController extends Controller
                 $resep->keterangan = $request->keterangan;
                 $resep->save();
 
-                // dd($resep->id_resep);
+                $totalHarga = null;
 
                 foreach ($request->obat as $index => $value) {
                     $resepDetail = new ResepDetail();
@@ -70,6 +71,8 @@ class DiagnosaController extends Controller
                     $resepDetail->metode = $request->metode[$index];
                     $resepDetail->syarat = $request->syarat[$index];
                     $resepDetail->save();
+
+                    $totalHarga += $resepDetail->obat->harga;
                 }
 
                 // store data rekam medik
@@ -94,8 +97,15 @@ class DiagnosaController extends Controller
                         'tanggal',
                         $request->tanggal
                     )->first();
-                $antrian->status = 'Selesai';
+                $antrian->status = 'selesai';
                 $antrian->save();
+
+                // Nota Pembayaran
+                $pembayaran = new Pembayaran();
+                $pembayaran->rekam_medik_id = $rekamMedik->id_rekam_medik;
+                $pembayaran->total_harga = $totalHarga + 75000;
+                $pembayaran->status = 'belum lunas';
+                $pembayaran->save();
 
                 notyf()->position('y', 'top')->addSuccess('Data Berhasil Ditambahkan');
             });

@@ -74,9 +74,17 @@
                             <label class="col-sm-2 form-label" for="stok">Stok</label>
                             <div class="col-sm-10">
                                 <div class="input-group input-group-merge">
-                                    <input type="number" id="stok" class="form-control" name="stok"
+                                    {{-- <input type="number" id="stok" class="form-control" name="stok"
                                         placeholder="160" aria-label="160" aria-describedby="stok" min="1" required
-                                        value="{{ $data->stok }}" />
+                                        value="{{ $data->stok }}" /> --}}
+                                    <select name="stok" id="stok" class="form-control">
+                                        <option value="tersedia" @if ($data->stok == 'tersedia') selected @endif>
+                                            tersedia
+                                        </option>
+                                        <option value="kosong" @if ($data->stok == 'kosong') selected @endif>
+                                            kosong
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

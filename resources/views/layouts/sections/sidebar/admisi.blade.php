@@ -18,13 +18,13 @@
             <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">3</div>
         </a>
     </li>
-    {{-- <li class="menu-item @if ($activeMenu == 'janji-temu') active @endif">
-        <a href="{{ route('temu.index') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-chat"></i>
-            <div data-i18n="">Janji Temu</div>
-            <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">4</div>
+    <li class="menu-item @if ($activeMenu == 'pembayaran') active @endif">
+        <a href="{{ route('pembayaran.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-envelope"></i>
+            <div data-i18n="Pembayaran">Pembayaran</div>
+            <div class="badge bg-label-primary fs-tiny rounded-pill ms-auto">1</div>
         </a>
-    </li> --}}
+    </li>
 
     <!-- Data -->
     <li class="menu-header small text-uppercase"><span class="menu-header-text">Data</span></li>
@@ -45,11 +45,6 @@
                     <div data-i18n="Notifications">Data Pasien</div>
                 </a>
             </li>
-            {{-- <li class="menu-item @if ($activeMenu == 'pasien-new') active @endif ">
-                <a href="/pasien/new" class="menu-link">
-                    <div data-i18n="Connections">Pasien Baru</div>
-                </a>
-            </li> --}}
         </ul>
     </li>
 

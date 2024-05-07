@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama', 50);
             $table->string('kategori', 50);
             $table->integer('harga');
-            $table->integer('stok');
+            $table->string('stok', 50);
             $table->string('penyedia', 50);
             $table->string('keterangan', 100)->nullable();
             $table->date('kadaluarsa');

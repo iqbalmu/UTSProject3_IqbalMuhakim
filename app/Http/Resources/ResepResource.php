@@ -16,7 +16,7 @@ class ResepResource extends JsonResource
     {
         return [
             'id_resep' => $this->id_resep,
-            'status' => $this->status,
+            'kode' => $this->kode,
             'keterangan' => $this->keterangan,
             'obat' => ResepObatCollection::make($this->whenLoaded('details'))
         ];

@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->increments('id_pembayaran');
-            $table->string('metode', 50);
-            $table->integer('jumlah');
-            $table->date('tanggal');
-            $table->string('keterangan', 100);
-            $table->unsignedInteger('pasien_id');
+            $table->integer('total_harga');
+            $table->string('status', 50);
             $table->unsignedInteger('rekam_medik_id');
             $table->timestamps();
 
-            $table->foreign('pasien_id')->references('id_pasien')->on('pasiens')->onDelete('cascade');
+            // $table->foreign('resep_id')->references('id_resep')->on('reseps')->onDelete('cascade');
             $table->foreign('rekam_medik_id')->references('id_rekam_medik')->on('rekam_mediks')->onDelete('cascade');
         });
     }

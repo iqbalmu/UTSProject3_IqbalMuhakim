@@ -11,6 +11,7 @@ use App\Http\Controllers\JadwalPraktekController;
 use App\Http\Controllers\JanjiTemuController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\RekamMedikController;
 use App\Http\Controllers\TebusObatController;
@@ -83,6 +84,9 @@ Route::middleware('auth.check')->group(function () {
     Route::middleware('role:admisi')->group(function () {
         Route::post('/antrian', [AntrianController::class, 'store'])->name('antrian.store');
         Route::put('/antrian', [AntrianController::class, 'update'])->name('antrian.update');
+
+        Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+        Route::put('/pembayaran', [PembayaranController::class, 'update'])->name('pembayaran.update');
     });
 
     Route::middleware('role:dokter')->group(function () {

@@ -94,14 +94,19 @@
                         </td>
                         <td>
                             @if (auth()->user()->role_id === 3)
-                                <a href="/antrian/{{ $item->nomor }}?poli_id={{ $item->poli->id_poli }}&mrn={{ $item->pasien->mrn }}&tanggal={{ $item->tanggal }}"
-                                    class="btn btn-sm btn-primary">
-                                    Diagnosa
-                                </a>
+                                @if ($item->status === 'selesai')
+                                    <button class="btn btn-sm btn-primary" disabled>Diagnosa</button>
+                                @else
+                                    <a href="/antrian/{{ $item->nomor }}?poli_id={{ $item->poli->id_poli }}&mrn={{ $item->pasien->mrn }}&tanggal={{ $item->tanggal }}"
+                                        class="btn btn-sm btn-primary">
+                                        Diagnosa
+                                    </a>
+                                @endif
                             @else
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalUpdateStatus" data-antrian-id={{ $item->id_antrian }}
-                                    data-nama-pasien={{ $item->pasien->user->nama }} data-status={{ $item->status }}>
+                                    data-nama-pasien={{ $item->pasien->user->nama }} data-status={{ $item->status }}
+                                    @if ($item->status === 'selesai') disabled @endif>
                                     Update Status
                                 </button>
                             @endif

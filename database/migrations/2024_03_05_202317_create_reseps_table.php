@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('reseps', function (Blueprint $table) {
             $table->increments('id_resep');
+            $table->string('kode')->unique();
             // $table->date('tanggal');
             $table->string('keterangan', 100)->nullable();
             $table->string('status', 30)->default('belum dibayar');
