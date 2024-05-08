@@ -4,12 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-//   user_id int [ref: - user.id]
-//   nomor_str string
-//   nomor_sip string
-//   foto string
-//   spesialisasi string
-
 return new class extends Migration
 {
     /**

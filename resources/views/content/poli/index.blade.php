@@ -51,7 +51,7 @@
                     <tr>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->deskripsi }}</td>
-                        <td>
+                        <td style="width: 20%">
                             <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#modalEditPoli" data-id="{{ $item->id_poli }}"
                                 data-nama="{{ $item->nama }}" data-deskripsi="{{ $item->deskripsi }}">
